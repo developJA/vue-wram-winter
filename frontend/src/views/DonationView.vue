@@ -78,7 +78,7 @@
                     </li>
                     <li>
                         <div class="thumb-img">
-                            <img src="" alt="">
+                            <img src=" " alt="">
                         </div>
                         <div class="thumb-cont">
                             <p class="title">사망자만 5만3천 명이 넘었습니다.</p>
