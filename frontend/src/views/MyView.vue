@@ -84,7 +84,7 @@ export default {
 }
 .thumb-info .sticker{
     border-radius : 15px;
-    background-color : rgba(101, 200, 1, 0.731);
+    background-color : #76da11;
     padding : 0px 6px;
     font-size : 0.8rem;
     vertical-align: center;

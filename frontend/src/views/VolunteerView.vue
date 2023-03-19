@@ -10,37 +10,22 @@
             <div id="map-cont">
                 <!-- <kakao-map></kakao-map> -->
             </div>
-            <div class="region-cont">
-                <div class="summary">
-                    <span>시/도</span>
-                    <em> > </em>
-                    <span>구/군</span>
-                    <em> > </em>
-                    <span class="active">읍/면/동</span>
-                </div>
-                <div class="thumb-box">
-                    <button class="on">강원도</button>
-                    <button>경기도</button>
-                    <button>경상남도</button>
-                    <button>경상북도</button>
-                    <button>광주광역시</button>
-                    <button>대구광역시</button>
-                    <button>대전광역시</button>
-                    <button>부산광역시</button>
-                    <button>서울특별시</button>
-                    <button>세종특별자치시</button>
-                </div>
-                <div class="bottom-box">
-                    <button class="btn-txt">다음</button>
-                </div>
-            </div>
+            <region-item class="region-cont" v-show="false" />
+            <list-item class="list-cont" v-show="true" />
         </div>
         
     </div>
 </template>
 
 <script>
+import RegionItem from '../components/volunteer/RegionItem.vue';
+import ListItem from '../components/volunteer/ListItem.vue';
+
 export default {
+  components: { 
+    RegionItem,
+    ListItem
+ },
 
 }
 </script>
@@ -72,40 +57,5 @@ export default {
     letter-spacing: -0.03rem;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
-.region-cont > .summary {
-    font-weight: 600;
-    color: #000;
-    padding: 10px 0px;
-}
-.region-cont .summary em {
-    color: #7e7e7e;
-}
-
-.region-cont .summary span.active {
-    color: #f45587;
-}
-.region-cont .thumb-box{
-    padding-top : 10px;
-}
-.region-cont .thumb-box button{
-    border: none;
-    background-color: #ffffff;
-    color: #333333;
-    display: inline-block;
-    text-align: center;
-    border-radius: 0.3rem;
-    vertical-align: top;
-    min-width: 6.3rem;
-    height: 2.8rem;
-    min-height: 2.2rem;
-    padding: 0 0.6rem;
-    line-height: 1.5;
-    margin: 4px 4px;
-    box-shadow: 1px 1px 1px 1px #9c9c9c;
-    font-size: 0.7rem;
-}
-.region-cont .thumb-box button.on{
-    background-color: #eee;
 }
 </style>

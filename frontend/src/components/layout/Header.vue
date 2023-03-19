@@ -1,5 +1,6 @@
 <template>
 	<header>
+		<button class="btn-back">뒤로</button>
         <h2>따뜻한겨울</h2>
 	</header>
 </template>

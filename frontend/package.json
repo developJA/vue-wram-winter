@@ -5,12 +5,8 @@
   "repository": {},
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack --config build/webpack.dev.js -w",
-    "clean": "node build/clean.js",
-    "build": "cross-env NODE_ENV=production webpack --config build/webpack.prod.js ",
-    "lint": "eslint -c .eslintrc --ext .js,.vue src/",
-    "lintfix": "eslint -c .eslintrc --ext .js,.vue src/ --fix",
-    "serve": "vue-cli-service serve"
+    "serve": "vue-cli-service serve --mode",
+    "build": "vue-cli-service build --mode"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",
@@ -36,6 +32,7 @@
     "globby": "^11.0.1",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.9.0",
+    "moment-locales-webpack-plugin": "^1.2.0",
     "rimraf": "^3.0.2",
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^4.1.0",

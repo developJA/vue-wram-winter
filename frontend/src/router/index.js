@@ -1,9 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import Define from "@/common/define";
+
+import IntroView from '../views/IntroView.vue';
 import HomeView from '../views/HomeView.vue';
 import VolunteerView from '../views/VolunteerView.vue';
 import DonationView from '../views/DonationView.vue';
 import MyView from '../views/MyView.vue';
+import DonationDetailView from '../views/DonationDetailView.vue';
 
 // lazyload 적용
 // () => import(/* webpackChunkName: "intro" */'views/intro');
@@ -14,10 +18,64 @@ const router = new Router({
   mode : 'history',
   // base: '/', // only history mode
   routes: [
-    { path: '/home', name: 'home', component: HomeView },
-    { path: '/volunteer', name: 'volunteer', component: VolunteerView },
-    { path: '/donation', name: 'donation', component: DonationView },
-    { path: '/my', name: 'my', component: MyView },
+    {
+      path: '/',
+      redirect: "/intro"
+    },
+    {
+      path: '/intro',
+      name: 'intro',
+      component: IntroView,
+      meta: {
+        layout: Define.LAYOUT_TYPE.EMPTY,
+        className: "dashboard",
+      },
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: HomeView,
+      meta: {
+        layout: Define.LAYOUT_TYPE.DEFAULT,
+        className: "dashboard",
+      },
+    },
+    { 
+      path: '/volunteer', 
+      name: 'volunteer', 
+      component: VolunteerView,
+      meta: {
+        layout: Define.LAYOUT_TYPE.DEFAULT,
+        className: "dashboard",
+      },
+    },
+    { 
+      path: '/donation', 
+      name: 'donation', 
+      component: DonationView,
+      meta: {
+        layout: Define.LAYOUT_TYPE.DEFAULT,
+        className: "dashboard",
+      }, 
+    },
+    { 
+      path: '/my', 
+      name: 'my', 
+      component: MyView,
+      meta: {
+        layout: Define.LAYOUT_TYPE.DEFAULT,
+        className: "dashboard",
+      }, 
+    },
+    { 
+      path: '/donationDetail', 
+      name: 'donationDetail', 
+      component: DonationDetailView,
+      meta: {
+        layout: Define.LAYOUT_TYPE.DEFAULT,
+        className: "dashboard",
+      }, 
+    },
   ],
 });
 

@@ -56,7 +56,7 @@
                             <p class="bottom">목표 모금액 : 150,000원</p>
                         </div>
                     </li>
-                    <li>
+                    <li> 
                         <div class="thumb-img">
                             <img src="" alt="">
                         </div>
