@@ -22,6 +22,13 @@ body > div{
 .container {
     padding: 0px 7px;
 }
+.h-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 .bottom-box {
     padding: 2rem 0.5rem 0.1rem 0.5rem;
     position: relative;
@@ -68,4 +75,18 @@ body > div{
     height: 60px;
     margin: 5px 0px;
     background-color: #fff;
+}
+
+.inp-box .inp-label i {
+	display: inline-block;
+	margin-left: .1rem;
+	color: #e13143;
+	font-weight: 700;
+	font-size: inherit;
+	line-height: 1.0rem;
+}
+
+/* padding */
+.pdtb15 {
+    padding : 15px 0px;
 }

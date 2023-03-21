@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Define from "@/common/define";
 
 import IntroView from '../views/IntroView.vue';
+import LoginView from '../views/LoginView.vue';
 import HomeView from '../views/HomeView.vue';
 import VolunteerView from '../views/VolunteerView.vue';
 import DonationView from '../views/DonationView.vue';
@@ -26,6 +27,15 @@ const router = new Router({
       path: '/intro',
       name: 'intro',
       component: IntroView,
+      meta: {
+        layout: Define.LAYOUT_TYPE.EMPTY,
+        className: "dashboard",
+      },
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView,
       meta: {
         layout: Define.LAYOUT_TYPE.EMPTY,
         className: "dashboard",
