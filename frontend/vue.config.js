@@ -3,14 +3,15 @@ const webpack = require("webpack");
 const path = require("path");
 
 const config = {
-    // devServer: {
-    //     proxy: {
-    //         "/w": {
-    //             // 프록시 요청을 보낼 서버의 주소
-    //             target: "https://www.weather.go.kr",
-    //         },
-    //     },
-    // },
+    devServer: {
+        proxy: {
+            "/CodeInquiryService": {
+                // 프록시 요청을 보낼 서버의 주소
+                target: "http://openapi.1365.go.kr/openapi/service/rest",
+                changeOrigin : true,
+            },
+        },
+    },
     configureWebpack: {
         plugins: [
             new webpack.ProvidePlugin({
