@@ -32,9 +32,13 @@ export function $popConfirm(param) {
     })
 }
 
-export function $list() {
-    EventBus.$emit('showList');
+export function $popList(param, callback) {
+    if (_.isString(param)) param = { text: param };
+    
+    EventBus.$emit('showList', param, callback);
+
     EventBus.$off('CBList');// 기 존재되는 이벤트 초기화
+    
     return new Promise((resolve) => {
         EventBus.$on('CBList', (rs) => {
             EventBus.$off('CBList');
