@@ -94,7 +94,20 @@
 
 <script>
 export default {
-
+    created() { 
+        console.log("hi!!!", this.$store._actions);
+        this.$store.dispatch("global/FETCH_DONATION_LIST");
+        console.log("state DONATION_LIST            ",  this.$store.state.DONATION_LIST);
+    },
+    computed : {
+        getList(){
+            let result;
+            result = this.$store.state.dailys.results;
+            console.log("result            ",  result);
+            return result;
+        }
+        
+    }
 }
 </script>
 

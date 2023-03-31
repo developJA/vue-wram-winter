@@ -42,8 +42,13 @@ body > div{
     color: #fff;
     white-space: nowrap;
     display: block;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     line-height: 1;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+}
+.bottom-box .btn-txt:disabled{
+    background-color: #9c9c9c;
 }
 .bg-green{
     background: #76da11;

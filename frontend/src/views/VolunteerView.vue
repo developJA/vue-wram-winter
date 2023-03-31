@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="srch-wrap">
-            <div class="inp-text select">
-                <input type="text" readonly value="내위치">
+            <div class="inp-text select" @click="showSelectPopup">
+                <input id="inpSelBox" type="text" readonly value="내위치">
                 <button type="button" class="btn-select"></button>
             </div>
         </div>
@@ -10,8 +10,8 @@
             <div id="map-cont">
                 <!-- <kakao-map></kakao-map> -->
             </div>
-            <region-item class="region-cont" v-show="false" />
-            <list-item class="list-cont" v-show="true" />
+            <region-item class="region-cont" v-show="true" />
+            <list-item class="list-cont" v-show="false" />
         </div>
         
     </div>
@@ -22,10 +22,33 @@ import RegionItem from '../components/volunteer/RegionItem.vue';
 import ListItem from '../components/volunteer/ListItem.vue';
 
 export default {
-  components: { 
-    RegionItem,
-    ListItem
- },
+    components: { 
+        RegionItem,
+        ListItem
+    },
+    methods : {
+        showSelectPopup(){
+            let param = {};
+            param.list = [
+                {"lb" : "내위치"},
+                {"lb" : "지역"},
+            ];
+            this.$popList(param, function(rs){
+                console.log("list popup callback", rs);
+                document.getElementById("inpSelBox").value = rs.lb;
+
+                this.changeContent();
+            });
+        },
+        changeContent(){
+            // let sltVal = document.getElementById("inpSelBox").value;
+            // if(sltVal == "내위치"){
+                
+            // }
+        }
+
+    }
+    
 
 }
 </script>
