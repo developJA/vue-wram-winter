@@ -29,22 +29,23 @@ export default {
     methods : {
         showSelectPopup(){
             let param = {};
+            const _this = this;
             param.list = [
                 {"lb" : "내위치"},
                 {"lb" : "지역"},
             ];
-            this.$popList(param, function(rs){
+            _this.$popList(param, function(rs){
                 console.log("list popup callback", rs);
                 document.getElementById("inpSelBox").value = rs.lb;
 
-                this.changeContent();
+                _this.changeContent();
             });
         },
         changeContent(){
-            // let sltVal = document.getElementById("inpSelBox").value;
-            // if(sltVal == "내위치"){
+            let sltVal = document.getElementById("inpSelBox").value;
+            if(sltVal == "내위치"){
                 
-            // }
+            }
         }
 
     }

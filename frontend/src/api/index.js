@@ -11,7 +11,7 @@ const config = {
 // 지역코드조회 
 function getAreaCodeInquiryList(sendObj) {
     var queryStr = new URLSearchParams(sendObj).toString();
-    return axios.get(`/CodeInquiryService/getAreaCodeInquiryList?serviceKey=${config.key}&numOfRows=1000`);
+    return axios.get(`/CodeInquiryService/getAreaCodeInquiryList?serviceKey=${config.key}&${queryStr}&numOfRows=1000`);
 }
 // 기부코드조회 
 function getCntrRealmCodeList() {
