@@ -1,4 +1,3 @@
-const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
 const webpack = require("webpack");
 const path = require("path");
 
@@ -15,9 +14,9 @@ const config = {
 
     devServer: {
         proxy: {
-            "/CodeInquiryService": {
+            "/openapi": {
                 // 프록시 요청을 보낼 서버의 주소
-                target: "http://openapi.1365.go.kr/openapi/service/rest",
+                target: "http://openapi.1365.go.kr",
                 changeOrigin : true,
             },
         },
@@ -36,9 +35,9 @@ const config = {
                 jQuery: "jquery",
                 d3: "d3",
             }),
-            new MomentLocalesPlugin({
-                localesToKeep: ["ko"],
-            }),
+            // new MomentLocalesPlugin({
+            //     localesToKeep: ["ko"],
+            // }),
         ],
     },
 };
