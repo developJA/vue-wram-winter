@@ -1,0 +1,53 @@
+.popup{overflow:hidden;position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;z-index:502;padding:3rem;}
+.popup-wrap{position:fixed;top:0;left:0;width:100%;height:100%;z-index:500;}
+.popup-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:501;opacity: 0.7;background-color: #000;backdrop-filter: blur(4px);}
+
+.popup-box{width:100%;padding:1rem;border-radius: .8rem;box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);background-color: #fff;display:flex;flex-direction:column;}
+.show .popup:not(.popup-select) .popup-box{animation: showpopup 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;}
+.remove .popup:not(.popup-select) .popup-box{animation: removepopup 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;}
+@keyframes showpopup {
+	0% {transform: scale(0);opacity: 0;}
+	100% {transform: scale(1);opacity:1}
+}
+@keyframes removepopup {
+	0% {transform: scale(1);opacity: 1;}
+	100% {transform: scale(0);opacity: 0;}
+}
+
+.pop-head{text-align:center;margin-bottom:2.2rem;font-size: 1.2rem;font-weight: bold;line-height: 1;color: var(--primary-black);}
+.no-head .pop-head{display:none;}
+.no-head .pop-body > *{font-size: 1.6rem !important;line-height: 1.5;color: var(--primary-black);}
+
+.popup:not(.popup-select) .pop-head + .pop-body >  *{width:100%;font-size: 1rem !important;line-height: 0.5;color: var(--primary-black);text-align:center;}
+
+/*.pop-foot{margin-top:0.5rem;}*/
+
+
+.popup-wrap .btn-wrap .btn{display: block;color:#fff;font-size:1rem;border-radius:0.8rem;background-color: black;margin:0 0.5rem 0 0.5rem}
+.popup-wrap .btn-wrap > *:only-child{flex:1 1 0}
+.popup-wrap .btn{width:100%;height:3rem;color:#fff;font-size:1.6rem;background: black;border-radius:.8rem;}
+
+.btn-wrap{display:flex;}
+.btn-wrap .btn.line, .hbox .btn.line{color: var(--default-black);background-color: transparent;}
+
+.pop-head .btn-close{
+	font-size: 0rem;
+    right: 3rem;
+    position: absolute;
+	background-image: url("../img/btn-pop-close.png");
+    background-size: 40px;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    border: 0;
+	background-color: #fff;
+}
+.pop-body li{
+    font-size: 1.3rem;
+    vertical-align: middle;
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+}
+.pop-body input:checked{
+    background: url("../img/ico-check-item.png") center right/1.5rem no-repeat;
+}

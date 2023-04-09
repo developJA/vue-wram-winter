@@ -1,0 +1,8 @@
+mcore.edu.warmwinter-debug-0 D:\workspace_toy\WarmWinter\build-types\debug\res
+mcore.edu.warmwinter-pngs-1 D:\workspace_toy\WarmWinter\build\generated\res\pngs\debug
+mcore.edu.warmwinter-resValues-2 D:\workspace_toy\WarmWinter\build\generated\res\resValues\debug
+mcore.edu.warmwinter-rs-3 D:\workspace_toy\WarmWinter\build\generated\res\rs\debug
+mcore.edu.warmwinter-mergeDebugResources-4 D:\workspace_toy\WarmWinter\build\intermediates\incremental\debug\mergeDebugResources\merged.dir
+mcore.edu.warmwinter-mergeDebugResources-5 D:\workspace_toy\WarmWinter\build\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+mcore.edu.warmwinter-merged_res-6 D:\workspace_toy\WarmWinter\build\intermediates\merged_res\debug
+mcore.edu.warmwinter-WarmWinter-7 D:\workspace_toy\WarmWinter\res
