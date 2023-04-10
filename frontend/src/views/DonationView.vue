@@ -56,7 +56,7 @@
                             <p class="bottom">목표 모금액 : 150,000원</p>
                         </div>
                     </li>
-                    <li> 
+                    <li>
                         <div class="thumb-img">
                             <img src="" alt="">
                         </div>
@@ -94,21 +94,20 @@
 
 <script>
 export default {
-    created() { 
-        console.log("hi!!!", this.$store._actions);
-        this.$store.dispatch("global/FETCH_DONATION_LIST");
-        console.log("state DONATION_LIST            ",  this.$store.state.DONATION_LIST);
+  created() {
+    console.log('hi!!!', this.$store._actions);
+    this.$store.dispatch('global/FETCH_DONATION_LIST');
+    console.log('state DONATION_LIST            ', this.$store.state.DONATION_LIST);
+  },
+  computed: {
+    getList() {
+      const result = this.$store.state.dailys.results;
+      console.log('result            ', result);
+      return result;
     },
-    computed : {
-        getList(){
-            let result;
-            result = this.$store.state.dailys.results;
-            console.log("result            ",  result);
-            return result;
-        }
-        
-    }
-}
+
+  },
+};
 </script>
 
 <style scoped>

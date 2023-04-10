@@ -7,13 +7,13 @@
             </div>
         </div>
         <div class="container">
-            <div id="map-cont">
+            <div id="map-cont" v-if="currComponent === 'map'">
                 <!-- <kakao-map></kakao-map> -->
             </div>
-            <region-item class="region-cont" v-show="true" />
-            <list-item class="list-cont" v-show="false" />
+            <region-item class="region-cont" v-if="currComponent === 'region'" @selectRegion="completeSelRegion"/>
+            <list-item class="list-cont" v-if="currComponent === 'list'" :regionInfo="sltRegionInfo"/>
         </div>
-        
+
     </div>
 </template>
 
@@ -22,36 +22,44 @@ import RegionItem from '../components/volunteer/RegionItem.vue';
 import ListItem from '../components/volunteer/ListItem.vue';
 
 export default {
-    components: { 
-        RegionItem,
-        ListItem
+  data() {
+    return {
+      currComponent: 'region',
+      sltRegionInfo: {},
+    };
+  },
+  components: {
+    RegionItem,
+    ListItem,
+  },
+  methods: {
+    showSelectPopup() {
+      const param = {};
+      const _this = this;
+      param.list = [
+        { lb: '내위치', value: 'map' },
+        { lb: '지역', value: 'region' },
+      ];
+      _this.$popList(param, function (rs) {
+        console.log('list popup callback', rs);
+        document.getElementById('inpSelBox').value = rs.lb;
+        document.getElementById('inpSelBox').setAttribute('data-value', rs.value);
+
+        _this.changeContent();
+      });
     },
-    methods : {
-        showSelectPopup(){
-            let param = {};
-            const _this = this;
-            param.list = [
-                {"lb" : "내위치"},
-                {"lb" : "지역"},
-            ];
-            _this.$popList(param, function(rs){
-                console.log("list popup callback", rs);
-                document.getElementById("inpSelBox").value = rs.lb;
+    changeContent() {
+      this.currComponent = document.getElementById('inpSelBox').getAttribute('data-value');
+    },
+    completeSelRegion(obj) {
+      console.log('completeSelRegion   !!!   ', obj);
+      this.sltRegionInfo = obj;
+      this.currComponent = 'list';
+    },
 
-                _this.changeContent();
-            });
-        },
-        changeContent(){
-            let sltVal = document.getElementById("inpSelBox").value;
-            if(sltVal == "내위치"){
-                
-            }
-        }
+  },
 
-    }
-    
-
-}
+};
 </script>
 
 <style scoped>

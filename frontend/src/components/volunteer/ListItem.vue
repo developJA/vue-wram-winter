@@ -22,58 +22,58 @@
                 </li> -->
                 <li v-for="listItem in volunList" class="bt-bld" v-bind:key="listItem.item" @click="moveDetail">
                     <div class="top">
-                        <span class="left dark-gray">{{ listItem.seq }}</span>
-                        <span class="icon bg-green">{{ listItem.statusName }}</span>
-                        <span class="icon bg-blue">{{ listItem.areaName }}</span>
-                        <span class="icon bg-pink">{{ listItem.termTypeName }}</span>
+                        <span class="left dark-gray">{{ listItem.progrmRegistNo }}</span>
+                        <span class="icon bg-green">{{ listItem.progrmSttusSe }}</span>
+                        <span class="icon bg-blue">{{ regionInfo.sidoNm }}</span>
+                        <span class="icon bg-pink">{{ listItem.progrmSttusSe }}</span>
                     </div>
-                    <p class="bold">{{ listItem.title }}</p>
-                    <p class="bold blue">{{ listItem.centName }}</p>
+                    <p class="bold">{{ listItem.progrmSj }}</p>
+                    <p class="bold blue">{{ listItem.nanmmbyNm }}</p>
                     <p class="dark-gray">{{ listItem.progrmBgnde }} ~ {{ listItem.progrmEndde }}</p>
                     <p class="bold">신청/필요인원 : <strong class="dark-gray">{{ listItem.reqCnt }}/{{ listItem.partCnt }}</strong></p>
-                </li>    
+                </li>
             </ul>
         </div>
     </div>
 </template>
 
 <script>
-import { getVolunteerList } from '../../api/index.js';
+import { getVolunteerAreaList } from '../../api/index.js';
 
 export default {
-    data() {
-        return {
-            volunList : [],
-        }
+  data() {
+    return {
+      volunList: [],
+    };
+  },
+  props: {
+    regionInfo: Object,
+  },
+  created() {
+    this.getListItem(this.regionInfo);
+  },
+  mounted() {
+    document.getElementsByClassName('title')[0].querySelector('span').innerHTML = `${this.regionInfo.sidoNm} ${this.regionInfo.gugunNm}`;
+  },
+  methods: {
+    moveDetail() {
+      this.$router.push({ path: 'donationDetail' });
     },
-    created() {
-        this.getListItem();
-
+    getListItem(obj) {
+      const param = {
+        schSido: obj.sidoCd,
+      };
+      getVolunteerAreaList(param)
+        .then((res) => {
+          console.log('getVolunteerAreaList     : ', res);
+          this.volunList = res.data.response.body.items.item;
+        })
+        .then((err) => {
+          console.log(err);
+        });
     },
-    methods : {
-        moveDetail(){
-            this.$router.push({ path: 'donationDetail' })
-        },
-        getListItem(){
-            getVolunteerList()
-            .then((res)=>{
-                console.log(res);
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(res.data, "text/xml");
-                const itemNodes = xmlDoc.getElementsByTagName('item'); // 특정 태그를 기준으로 변수에 담는다
-                // console.log(itemNodes);
-
-                // xml -> JSON
-                this.volunList = this.CommonUtil.xmlToJson(itemNodes);
-                console.log("volunList   >>>    ", this.volunList);
-                return this.volunList;
-            })
-            .then((err)=>{
-                console.log(err);
-            });
-        },
-    }
-}
+  },
+};
 </script>
 
 <style scoped>
