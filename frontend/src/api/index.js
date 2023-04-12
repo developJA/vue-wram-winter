@@ -48,15 +48,18 @@ function getVolunteerList() {
   return axios.get(url);
 }
 
-// 지역별 봉사 참여정보 목록조회
+// 봉사 참여정보 지역벌 목록조회
 function getVolunteerAreaList(sendObj) {
   const queryStr = new URLSearchParams(sendObj).toString();
   // url += '&' + encodeURIComponent('schSido') + '=' + encodeURIComponent('6410000'); /**/
   // url += '&' + encodeURIComponent('schSign1') + '=' + encodeURIComponent('6410000'); /**/
-  // url += '&' + encodeURIComponent('upperClCode') + '=' + encodeURIComponent('0100'); /**/
-  // url += '&' + encodeURIComponent('nanmClCode') + '=' + encodeURIComponent('0199'); /**/
-  // url += '&' + encodeURIComponent('schCateGu') + '=' + encodeURIComponent('all'); /**/
-  return axios.get(`${config.baseUrl}/VolunteerPartcptnService/getVltrAreaList?serviceKey=${config.key}&${queryStr}`);
+  return axios.get(`${config.baseUrl}/VolunteerPartcptnService/getVltrSearchWordList?serviceKey=${config.key}&${queryStr}`);
+}
+
+// 자원봉사참여 상세정보
+function getVolunteerDetail(sendObj) {
+  const queryStr = new URLSearchParams(sendObj).toString();
+  return axios.get(`${config.baseUrl}/VolunteerPartcptnService/getVltrPartcptnItem?serviceKey=${config.key}&${queryStr}`);
 }
 
 export {
@@ -66,4 +69,5 @@ export {
   getCntrGrpProgramList,
   getVolunteerList,
   getVolunteerAreaList,
+  getVolunteerDetail,
 };
