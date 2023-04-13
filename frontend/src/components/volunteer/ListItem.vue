@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     moveDetail() {
-      this.$router.push({ path: 'donationDetail' });
+      this.$router.push({ path: 'volunteerDetail' });
     },
     getListItem(obj) {
       const param = {
