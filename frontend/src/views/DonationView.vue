@@ -13,7 +13,16 @@
                 <button>국제교류협력</button>
                 <button>시민사회구축</button>
                 <button>기타</button>
+                <swiper class="swiper h500" :options="swiperOption">
+                    <swiper-slide v-for="listItem in categories" class="post" v-bind:key="listItem.item">
+                        국제구제
+                    </swiper-slide>
+
+                    <div class="swiper-pagination" slot="pagination"></div>
+
+                </swiper>
             </div>
+
             <div class="list-wrap">
                 <ul>
                     <li>
@@ -93,7 +102,32 @@
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+import { getCntrRealmCodeList } from '../api/index.js';
+import 'swiper/css/swiper.css';
+
 export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  data() {
+    return {
+      swiperOption: {
+        // slidesPerView: 4,
+        spaceBetween: 20,
+        loop: true,
+        // navigation: {
+        //     nextEl: '.swiper-button-next',
+        //     prevEl: '.swiper-button-prev'
+        // },
+        pagination: {
+          el: '.swiper-pagination',
+        },
+      },
+      categories: [],
+    };
+  },
   created() {
     console.log('hi!!!', this.$store._actions);
     this.$store.dispatch('global/FETCH_DONATION_LIST');
@@ -106,6 +140,14 @@ export default {
       return result;
     },
 
+  },
+  methods: {
+    getCateList() {
+      getCntrRealmCodeList()
+        .then((res) => {
+          console.log('getCntrRealmCodeList     : ', res);
+        });
+    },
   },
 };
 </script>

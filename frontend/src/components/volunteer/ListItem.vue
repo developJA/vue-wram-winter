@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="title underline">
-            <span>서울시 마포구 상암동</span>
+            <span><!--서울시 마포구 상암동--></span>
         </div>
         <div class="total">
-            <span>전체 <em class="blue">3186</em>건</span>
+            <span>전체 <em id="emTotCnt" class="blue"><!--3186--></em>건</span>
         </div>
         <div class="list-wrap">
             <ul>
@@ -20,17 +20,19 @@
                     <p class="dark-gray">2023-03-01 ~ 23023-05-01</p>
                     <p class="bold">필요/신청인원 : <strong class="dark-gray">3/0</strong></p>
                 </li> -->
-                <li v-for="listItem in volunList" class="bt-bld" v-bind:key="listItem.item" @click="moveDetail">
+                <li v-for="listItem in volunList" class="bt-bld" v-bind:key="listItem.item" @click="moveDetail(listItem)">
                     <div class="top">
                         <span class="left dark-gray">{{ listItem.progrmRegistNo }}</span>
-                        <span class="icon bg-green">{{ listItem.progrmSttusSe }}</span>
-                        <span class="icon bg-blue">{{ regionInfo.sidoNm }}</span>
-                        <span class="icon bg-pink">{{ listItem.progrmSttusSe }}</span>
+                        <span class="icon bg-green">{{ listItem.adultPosblAt=="Y" ? "성인" : ""}} {{listItem.yngbgsPosblAt=="Y" ? "/ 청소년" : ""}}</span>
+                        <span class="icon bg-blue">{{ regionInfo.gugunNm }}</span>
+                        <span class="icon bg-pink">{{ progrmSttObj[listItem.progrmSttusSe] }}</span>
                     </div>
                     <p class="bold">{{ listItem.progrmSj }}</p>
                     <p class="bold blue">{{ listItem.nanmmbyNm }}</p>
-                    <p class="dark-gray">{{ listItem.progrmBgnde }} ~ {{ listItem.progrmEndde }}</p>
-                    <p class="bold">신청/필요인원 : <strong class="dark-gray">{{ listItem.reqCnt }}/{{ listItem.partCnt }}</strong></p>
+                    <p class="">{{ listItem.progrmBgnde }} ~ {{ listItem.progrmEndde }}</p>
+                    <p class="bold">모집분야 :
+                      <strong class="dark-gray">{{ listItem.srvcClCode }}</strong>
+                      </p>
                 </li>
             </ul>
         </div>
@@ -44,6 +46,12 @@ export default {
   data() {
     return {
       volunList: [],
+      totalCount: 0,
+      progrmSttObj: { // 모집상태
+        1: '모집대기',
+        2: '모집중',
+        3: '모집완료',
+      },
     };
   },
   props: {
@@ -56,17 +64,27 @@ export default {
     document.getElementsByClassName('title')[0].querySelector('span').innerHTML = `${this.regionInfo.sidoNm} ${this.regionInfo.gugunNm}`;
   },
   methods: {
-    moveDetail() {
-      this.$router.push({ path: 'volunteerDetail' });
+    moveDetail(obj) {
+      this.$router.push({
+        path: 'volunteerDetail',
+        query: {
+          prgrmNo: obj.progrmRegistNo,
+        },
+      });
     },
     getListItem(obj) {
       const param = {
         schSido: obj.sidoCd,
+        schSign1: obj.gugunCd,
       };
       getVolunteerAreaList(param)
         .then((res) => {
           console.log('getVolunteerAreaList     : ', res);
           this.volunList = res.data.response.body.items.item;
+
+          // 전체 건수
+          this.totalCount = res.data.response.body.totalCount;
+          document.getElementById('emTotCnt').innerHTML = this.totalCount;
         })
         .then((err) => {
           console.log(err);
