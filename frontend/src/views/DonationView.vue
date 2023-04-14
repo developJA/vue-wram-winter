@@ -2,23 +2,12 @@
     <div>
         <div class="container">
             <div class="category-wrap">
-                <button>국제구제</button>
-                <button>재난</button>
-                <button>자선</button>
-                <button>교육문화과학</button>
-                <button>경제활동</button>
-                <button>환경보전</button>
-                <button>권익신장</button>
-                <button>보건복지</button>
-                <button>국제교류협력</button>
-                <button>시민사회구축</button>
-                <button>기타</button>
-                <swiper class="swiper h500" :options="swiperOption">
-                    <swiper-slide v-for="listItem in categories" class="post" v-bind:key="listItem.item">
-                        국제구제
+                <swiper class="swiper mrg10" :options="swiperOption">
+                    <swiper-slide v-for="listItem in categories" class="btn-cate" v-bind:key="listItem.item">
+                        {{listItem.codeNm}}
                     </swiper-slide>
 
-                    <div class="swiper-pagination" slot="pagination"></div>
+                    <!-- <div class="swiper-pagination" slot="pagination"></div> -->
 
                 </swiper>
             </div>
@@ -114,24 +103,16 @@ export default {
   data() {
     return {
       swiperOption: {
-        // slidesPerView: 4,
-        spaceBetween: 20,
-        loop: true,
-        // navigation: {
-        //     nextEl: '.swiper-button-next',
-        //     prevEl: '.swiper-button-prev'
-        // },
-        pagination: {
-          el: '.swiper-pagination',
-        },
+        slidesPerView: 4,
       },
       categories: [],
     };
   },
   created() {
-    console.log('hi!!!', this.$store._actions);
-    this.$store.dispatch('global/FETCH_DONATION_LIST');
-    console.log('state DONATION_LIST            ', this.$store.state.DONATION_LIST);
+    // console.log('hi!!!', this.$store._actions);
+    // this.$store.dispatch('global/FETCH_DONATION_LIST');
+    // console.log('state DONATION_LIST            ', this.$store.state.DONATION_LIST);
+    this.getCateList();
   },
   computed: {
     getList() {
@@ -145,7 +126,7 @@ export default {
     getCateList() {
       getCntrRealmCodeList()
         .then((res) => {
-          console.log('getCntrRealmCodeList     : ', res);
+          this.categories = res.data.response.body.items.item;
         });
     },
   },
@@ -186,5 +167,14 @@ export default {
     color : #f45587;
     font-weight: bold;
     font-size: 11px;
+}
+.btn-cate {
+    border-radius: 8px;
+    border: 0.1rem solid #333;
+    max-width: 8rem;
+    font-size: 13px;
+    margin-right: 1rem;
+    padding: 10px 5px;
+    text-align: center;
 }
 </style>
