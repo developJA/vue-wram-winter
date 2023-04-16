@@ -23,9 +23,9 @@
                 <li v-for="listItem in volunList" class="bt-bld" v-bind:key="listItem.item" @click="moveDetail(listItem)">
                     <div class="top">
                         <span class="left dark-gray">{{ listItem.progrmRegistNo }}</span>
-                        <span class="icon bg-green">{{ listItem.adultPosblAt=="Y" ? "성인" : ""}} {{listItem.yngbgsPosblAt=="Y" ? "/ 청소년" : ""}}</span>
+                        <span class="icon bg-green">{{ progrmSttObj[listItem.progrmSttusSe] }}</span>
                         <span class="icon bg-blue">{{ regionInfo.gugunNm }}</span>
-                        <span class="icon bg-pink">{{ progrmSttObj[listItem.progrmSttusSe] }}</span>
+                        <span class="icon bg-pink">{{ listItem.adultPosblAt=="Y" ? "성인" : ""}} {{listItem.yngbgsPosblAt=="Y" ? "/ 청소년" : ""}}</span>
                     </div>
                     <p class="bold">{{ listItem.progrmSj }}</p>
                     <p class="bold blue">{{ listItem.nanmmbyNm }}</p>

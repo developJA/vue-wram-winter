@@ -85,12 +85,17 @@ export default {
 
       getAreaCodeInquiryList(param)
         .then((res) => {
-          console.log(res.data.response.body);
+          // console.log(res.data.response.body);
           const { body } = res.data.response;
           const items = body.items.item;
 
-          //   console.log('getGugunInfo   >>>   ', items);
-          this.gugunList = items;
+          // console.log('getGugunList   >>>   ', items);
+          if (typeof items === 'object') {
+            this.gugunList = [items];
+          } else {
+            this.gugunList = items;
+          }
+
           this.rgnlevel = 2; // 레벨 2
 
           document.getElementById('btnNext').innerText = '확인';

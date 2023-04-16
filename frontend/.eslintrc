@@ -68,6 +68,7 @@
     "no-alert" : 0,
     "max-len" : 0,
     "object-shorthand":"off",
-    "prefer-destructuring": ["error", {"object": true, "array": false}]
+    "prefer-destructuring": ["error", {"object": true, "array": false}],
+    "global-require": 0
   }
 }

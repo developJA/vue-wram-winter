@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
+const fs = require("fs");
 
 const useSourceMap = process.env.GENERATE_SOURCEMAP === "true";
 const publicPath = process.env.PUBLIC_URL || "/";

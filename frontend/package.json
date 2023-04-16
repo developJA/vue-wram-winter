@@ -57,5 +57,10 @@
     "swiper": "^5.4.5",
     "vue-awesome-swiper": "^4.1.1",
     "vue-axios": "^3.5.2"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }
