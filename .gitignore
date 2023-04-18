@@ -2,3 +2,4 @@ frontend/node_modules/
 build/
 bin/
 frontend/node_modules/*
+assets/res/www/web/*

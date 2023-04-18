@@ -17,7 +17,7 @@ import VolunteerDetailView from '../views/VolunteerDetailView.vue';
 Vue.use(Router);
 
 const router = new Router({
-  mode: 'history',
+  mode: 'hash',
   // base: '/', // only history mode
   routes: [
     {

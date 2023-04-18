@@ -24,9 +24,9 @@
                             <p class="bottom">목표 모금액 : 150,000원</p>
                         </div>
                     </li> -->
-                    <li v-for="listItem in donationList" v-bind:key="listItem.item">
+                    <li v-for="listItem in donationList" :key="listItem.item">
                         <div class="thumb-img">
-                            <img :src="require(`../assets/img/logo/${listItem.rcritrNm} 로고.png`)" alt="">
+                            <img :src="loadImage(listItem)" alt="">
                         </div>
                         <div class="thumb-cont">
                             <p class="title">{{listItem.reprsntSj || listItem.rcritPurps}}</p>
@@ -42,7 +42,7 @@
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
-import { getCntrRealmCodeList, getCntrGrpProgramList } from '../api/index.js';
+import { getCntrRealmCodeList, getCntrCategoryGrpList, getCntrGrpProgramList } from '../api/index.js';
 import 'swiper/css/swiper.css';
 
 export default {
@@ -58,18 +58,13 @@ export default {
       categories: [],
       sltCateCd: '', // 선택한 카테고리 코드
       donationList: [],
+      fs : null,    // 파일시스템 모듈
     };
   },
   created() {
     // console.log('hi!!!', this.$store._actions);
     // this.$store.dispatch('global/FETCH_DONATION_LIST');
     // console.log('state DONATION_LIST            ', this.$store.state.DONATION_LIST);
-    const imgUrl = '../assets/img/logo/법인 나누우리 로고.png';
-    const fs = require('fs'); // Directory 존재 여부 체크
-    const directory = fs.mkdirSync(imgUrl);
-    console.log('Boolan : ', directory);
-    // const directory = fs.existsSync(imgUrl);// 디렉토리 경로 입력
-    // console.log('Boolan : ', directory);
 
     this.getCateList();
   },
@@ -104,12 +99,46 @@ export default {
       const param = {
         schCntrClCode: this.sltCateCd,
       };
-      getCntrGrpProgramList(param)
+       getCntrCategoryGrpList(param)
         .then((res) => {
-          this.donationList = res.data.response.body.items.item;
-          console.log('getCntrCategoryGrpList', this.donationList);
+            const items = res.data.response.body.items.item;
+          
+            console.log('getCntrCategoryGrpList   >>> ', items);
+            this.getDonationList2(items);
         });
     },
+    async getDonationList2(list) {
+        for(let i=0;i<list.length; i++){
+            const result = await loop(list[i].cntrProgrmRegistNo);
+            console.log("result    : ",result);
+        }
+
+        function loop(str){
+            console.log("cntrProgrmRegistNo   : ",str);
+            return new Promise(function(resolve) {
+                const param = {
+                    schCntrProgrmRegistNo: str,
+                };
+                getCntrGrpProgramList(param)
+                .then((res) => {
+                    console.log("response >> ",res);
+                    resolve(res.data.response.body.items.item);
+                });
+            });
+        }
+        
+    },
+    loadImage(obj) {
+        let url = "";
+        try {
+            url = require(`../assets/img/logo/${obj.rcritrNm} 로고.png`);
+        } catch (err) {
+            console.log('no file error');
+            url = require(`../assets/img/logo/no_image.png`);
+        }
+
+        return url;
+    }
   },
 };
 </script>
@@ -131,7 +160,7 @@ export default {
     border-radius: 10px;
 }
 .list-wrap .thumb-cont {
-    font-family: 굴림;
+    /* font-family: 굴림; */
     background-color: #fff;
 }
 .list-wrap .thumb-cont p.title{
@@ -162,4 +191,8 @@ export default {
 .btn-cate.on {
     background: #76da11;
 }
+.list-wrap .thumb-img img {
+    width: 100%;
+}
+
 </style>

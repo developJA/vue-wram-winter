@@ -39,8 +39,11 @@ const config = {
             // new MomentLocalesPlugin({
             //     localesToKeep: ["ko"],
             // }),
+
         ],
     },
+
+   
 };
 
 module.exports = config;

@@ -12,7 +12,7 @@
         </update>
     </resource>
     <startpage>
-        <name>www/index.html</name>
+        <name>www/web/index.html</name>
         <orient>default</orient>
         <orient-tablet>default</orient-tablet>
     </startpage>

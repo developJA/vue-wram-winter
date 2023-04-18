@@ -25,12 +25,10 @@ function getCntrCategoryGrpList(sendObj) {
   return axios.get(`${config.baseUrl}/ContributionGroupService/getCntrCategoryGrpList?serviceKey=${config.key}&${queryStr}`);
 }
 // 기부목록 조회
-function getCntrGrpProgramList() {
-  // &schRcritBgnde=20200301&schRcritEndde=20201231 -- 화면개발 시 쓰지 않기
-  // cntrClUpNm(분야)로 필터링 필요
-  console.log('getCntrGrpProgramList!!');
-  console.log(`/ContributionGroupService/getCntrGrpProgramList?serviceKey=${config.key}`);
-  return axios.get(`${config.baseUrl}/ContributionGroupService/getCntrGrpProgramList?serviceKey=${config.key}`);
+function getCntrGrpProgramList(sendObj) {
+  const queryStr = new URLSearchParams(sendObj).toString();
+  // url += '&' + encodeURIComponent('schCntrProgrmRegistNo') + '=' + encodeURIComponent('01'); /**/
+  return axios.get(`${config.baseUrl}/ContributionGroupService/getCntrGrpProgramList?serviceKey=${config.key}&${queryStr}`);
 }
 // 기부목록 조회 2
 // https://www.nanumkorea.go.kr/ctgp/selectCntrGrp.do?cntrRalm=&grpNm=&grpRegistCode=&pageIndex=2
