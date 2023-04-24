@@ -3,8 +3,8 @@
         <div class="container">
             <div id="divCateWrap" class="category-wrap">
                 <swiper class="swiper mrg10" :options="swiperOption">
-                    <swiper-slide v-for="listItem in categories" v-bind:key="listItem.item" ref="VuePerson">
-                        <button class="btn-cate bg-light-green" @click="selectCategory(listItem, $event)">{{listItem.codeNm}}</button>
+                    <swiper-slide v-for="cateItem in categories" v-bind:key="cateItem.item" ref="VuePerson">
+                        <button class="btn-cate bg-light-green" @click="selectCategory(cateItem, $event)">{{cateItem.codeNm}}</button>
                     </swiper-slide>
 
                     <!-- <div class="swiper-pagination" slot="pagination"></div> -->
@@ -92,7 +92,7 @@ export default {
       console.log('sltCateCd   : ', this.sltCateCd);
 
       document.getElementById('ulDonatList').innerHTML = ""; // 재렌더링하기 위한 ul 요소 비워줌 
-      this.setDonationList();
+      this.setDonationList(obj.code);
     },
     getDonationTotCount(){
       const param = {
@@ -121,6 +121,8 @@ export default {
     },
     // 카테고리에 따른 리스트 세팅
     setDonationList(code){
+        this.donationList = []; // 초기화
+
         if(code == ""){ // 전체
             this.donationList = this.donationAllList;
         }else{
@@ -129,7 +131,7 @@ export default {
                 return item.cntrClUpNm.includes(this.sltCateNm);
             });
             console.log("sltCateNm  : ",this.sltCateNm);
-            console.log("donationList  : ",this.donationList);
+            console.log("donationList  : ",JSON.stringify(this.donationList));
         }
     },
     loadImage(obj) {
@@ -148,11 +150,16 @@ export default {
         this.$router.push({
             path: 'donationDetail',
             query: {
-                schCntrProgrmRegistNo: obj.schCntrProgrmRegistNo,
+                schCntrProgrmRegistNo: obj.rcritrId,
             },
         });
     }
   },
+  watch : {
+    donationList() {
+      console.log("donationList watch!!!!");
+    }
+  }
 
 };
 </script>
