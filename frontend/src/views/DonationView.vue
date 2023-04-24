@@ -3,7 +3,7 @@
         <div class="container">
             <div id="divCateWrap" class="category-wrap">
                 <swiper class="swiper mrg10" :options="swiperOption">
-                    <swiper-slide v-for="listItem in categories" v-bind:key="listItem.item">
+                    <swiper-slide v-for="listItem in categories" v-bind:key="listItem.item" ref="VuePerson">
                         <button class="btn-cate bg-light-green" @click="selectCategory(listItem, $event)">{{listItem.codeNm}}</button>
                     </swiper-slide>
 
@@ -13,7 +13,7 @@
             </div>
 
             <div class="list-wrap">
-                <ul>
+                <ul id="ulDonatList">
                     <!-- <li>
                         <div class="thumb-img">
                             <img src="" alt="">
@@ -24,7 +24,7 @@
                             <p class="bottom">목표 모금액 : 150,000원</p>
                         </div>
                     </li> -->
-                    <li v-for="listItem in donationList" :key="listItem.item">
+                    <li v-for="listItem in this.donationList" :key="listItem.item"  @click="selectItem(listItem)">
                         <div class="thumb-img">
                             <img :src="loadImage(listItem)" alt="">
                         </div>
@@ -42,7 +42,7 @@
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
-import { getCntrRealmCodeList, getCntrCategoryGrpList, getCntrGrpProgramList } from '../api/index.js';
+import { getCntrRealmCodeList, getCntrGrpProgramList } from '../api/index.js';
 import 'swiper/css/swiper.css';
 
 export default {
@@ -53,34 +53,31 @@ export default {
   data() {
     return {
       swiperOption: {
-        slidesPerView: 4,
+        slidesPerView: 3.5,
       },
       categories: [],
-      sltCateCd: '', // 선택한 카테고리 코드
+      sltCateCd: '', // 선택한 카테고리코드
+      sltCateNm: '', // 선택한 카테고리명
+      donationAllList : [],
       donationList: [],
       fs : null,    // 파일시스템 모듈
+      totCnt : 0,   // 기부 총 건수
+
+      isExist: this.$refs.VuePerson
     };
   },
   created() {
-    // console.log('hi!!!', this.$store._actions);
-    // this.$store.dispatch('global/FETCH_DONATION_LIST');
-    // console.log('state DONATION_LIST            ', this.$store.state.DONATION_LIST);
-
     this.getCateList();
-  },
-  computed: {
-    getList() {
-      const result = this.$store.state.dailys.results;
-      console.log('result            ', result);
-      return result;
-    },
-
   },
   methods: {
     getCateList() {
       getCntrRealmCodeList()
         .then((res) => {
-          this.categories = res.data.response.body.items.item;
+          this.categories.push({"code" : "", "codeNm" : "전체"})
+          this.categories = this.categories.concat(res.data.response.body.items.item);
+        //   this.isExist();
+
+          this.getDonationTotCount();
         });
     },
     selectCategory(obj, event) {
@@ -90,56 +87,73 @@ export default {
       event.currentTarget.classList.add('on');
 
       this.sltCateCd = obj.code;
+      this.sltCateNm = obj.codeNm;
 
       console.log('sltCateCd   : ', this.sltCateCd);
 
-      this.getDonationList();
+      document.getElementById('ulDonatList').innerHTML = ""; // 재렌더링하기 위한 ul 요소 비워줌 
+      this.setDonationList();
     },
-    getDonationList() {
+    getDonationTotCount(){
       const param = {
         schCntrClCode: this.sltCateCd,
       };
-       getCntrCategoryGrpList(param)
-        .then((res) => {
-            const items = res.data.response.body.items.item;
-          
-            console.log('getCntrCategoryGrpList   >>> ', items);
-            this.getDonationList2(items);
-        });
-    },
-    async getDonationList2(list) {
-        for(let i=0;i<list.length; i++){
-            const result = await loop(list[i].cntrProgrmRegistNo);
-            console.log("result    : ",result);
-        }
-
-        function loop(str){
-            console.log("cntrProgrmRegistNo   : ",str);
-            return new Promise(function(resolve) {
-                const param = {
-                    schCntrProgrmRegistNo: str,
-                };
-                getCntrGrpProgramList(param)
-                .then((res) => {
-                    console.log("response >> ",res);
-                    resolve(res.data.response.body.items.item);
-                });
-            });
-        }
+      getCntrGrpProgramList(param)
+      .then((res) => {
+        this.totCnt = res.data.response.body.totalCount;
         
+        console.log('리스트  총건수 : ', this.totCnt);
+        this.getDonationList();
+      });
+    },
+    // 모든 목록 조회
+    getDonationList(){
+      const param = {
+        numOfRows: this.totCnt, // 전체 조회
+      };
+      getCntrGrpProgramList(param)
+      .then((res) => {
+
+        this.donationAllList = res.data.response.body.items.item; // 전체 조회   
+        this.donationList = this.donationAllList;
+        // console.log("all list  >> ", this.donationList);
+      });
+    },
+    // 카테고리에 따른 리스트 세팅
+    setDonationList(code){
+        if(code == ""){ // 전체
+            this.donationList = this.donationAllList;
+        }else{
+            const list = this.donationAllList;
+            this.donationList = list.filter(item => {
+                return item.cntrClUpNm.includes(this.sltCateNm);
+            });
+            console.log("sltCateNm  : ",this.sltCateNm);
+            console.log("donationList  : ",this.donationList);
+        }
     },
     loadImage(obj) {
         let url = "";
         try {
             url = require(`../assets/img/logo/${obj.rcritrNm} 로고.png`);
         } catch (err) {
-            console.log('no file error');
+            // console.log('no file error');
             url = require(`../assets/img/logo/no_image.png`);
         }
 
         return url;
+    },
+    // 리스트 선택
+    selectItem(obj) {
+        this.$router.push({
+            path: 'donationDetail',
+            query: {
+                schCntrProgrmRegistNo: obj.schCntrProgrmRegistNo,
+            },
+        });
     }
   },
+
 };
 </script>
 
@@ -179,17 +193,31 @@ export default {
     font-size: 11px;
 }
 .btn-cate {
-    border-radius: 8px;
+    /* border-radius: 8px;
     border: none;
     width: 5.3rem;
     font-size: 13px;
     margin-right: 1rem;
     padding: 10px 5px;
     text-align: center;
+    height: 3rem; */
+    border: none;
+    background-color: #ffffff;
+    color: #333333;
+    text-align: center;
+    border-radius: 0.3rem;
+    width: 5.3rem;
     height: 3rem;
+    min-height: 2.2rem;
+    padding: 1rem 0.5rem;
+    line-height: 1.5;
+    margin: 0.3rem;
+    box-shadow: 1px 1px 1px 1px #9c9c9c;
+    font-size: 0.7rem;
+    /* margin-right: 1rem; */
 }
 .btn-cate.on {
-    background: #76da11;
+    background-color: #eee;
 }
 .list-wrap .thumb-img img {
     width: 100%;
