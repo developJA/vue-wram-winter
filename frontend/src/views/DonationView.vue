@@ -13,7 +13,7 @@
             </div>
 
             <div class="list-wrap">
-                <ul id="ulDonatList">
+                <ul id="ulDonatList" v-if="donationList.length > 0">
                     <!-- <li>
                         <div class="thumb-img">
                             <img src="" alt="">
@@ -24,7 +24,7 @@
                             <p class="bottom">목표 모금액 : 150,000원</p>
                         </div>
                     </li> -->
-                    <li v-for="listItem in this.donationList" :key="listItem.item"  @click="selectItem(listItem)">
+                    <li v-for="listItem in donationList" :key="listItem.item"  @click="selectItem(listItem)">
                         <div class="thumb-img">
                             <img :src="loadImage(listItem)" alt="">
                         </div>
@@ -62,8 +62,6 @@ export default {
       donationList: [],
       fs : null,    // 파일시스템 모듈
       totCnt : 0,   // 기부 총 건수
-
-      isExist: this.$refs.VuePerson
     };
   },
   created() {
@@ -75,7 +73,6 @@ export default {
         .then((res) => {
           this.categories.push({"code" : "", "codeNm" : "전체"})
           this.categories = this.categories.concat(res.data.response.body.items.item);
-        //   this.isExist();
 
           this.getDonationTotCount();
         });
@@ -91,7 +88,6 @@ export default {
 
       console.log('sltCateCd   : ', this.sltCateCd);
 
-      document.getElementById('ulDonatList').innerHTML = ""; // 재렌더링하기 위한 ul 요소 비워줌 
       this.setDonationList(obj.code);
     },
     getDonationTotCount(){
@@ -115,8 +111,9 @@ export default {
       .then((res) => {
 
         this.donationAllList = res.data.response.body.items.item; // 전체 조회   
-        this.donationList = this.donationAllList;
-        // console.log("all list  >> ", this.donationList);
+        this.setDonationList("");
+        
+        document.getElementsByClassName("btn-cate")[0].classList.add('on'); // '전체'버튼 활성화
       });
     },
     // 카테고리에 따른 리스트 세팅
@@ -131,35 +128,31 @@ export default {
                 return item.cntrClUpNm.includes(this.sltCateNm);
             });
             console.log("sltCateNm  : ",this.sltCateNm);
-            console.log("donationList  : ",JSON.stringify(this.donationList));
+            // console.log("donationList  : ",JSON.stringify(this.donationList));
         }
     },
     loadImage(obj) {
-        let url = "";
-        try {
-            url = require(`../assets/img/logo/${obj.rcritrNm} 로고.png`);
-        } catch (err) {
-            // console.log('no file error');
-            url = require(`../assets/img/logo/no_image.png`);
-        }
+      let url = "";
+      try {
+        url = require(`../assets/img/logo/${obj.rcritrNm} 로고.png`);
+      } catch (err) {
+        // console.log('no file error');
+        url = require(`../assets/img/logo/no_image.png`);
+      }
 
-        return url;
+      return url;
     },
     // 리스트 선택
     selectItem(obj) {
+      console.log("sel obj   : ",obj);
         this.$router.push({
             path: 'donationDetail',
             query: {
-                schCntrProgrmRegistNo: obj.rcritrId,
+              donationInfo: obj,
             },
         });
     }
   },
-  watch : {
-    donationList() {
-      console.log("donationList watch!!!!");
-    }
-  }
 
 };
 </script>

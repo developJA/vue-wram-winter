@@ -61,6 +61,11 @@ function getVolunteerDetail(sendObj) {
   return axios.get(`${config.baseUrl}/VolunteerPartcptnService/getVltrPartcptnItem?serviceKey=${config.key}&${queryStr}`);
 }
 
+// 구글 이미지 검색 API
+function searchGoogleImage(queryStr){
+  return axios.get(`https://www.googleapis.com/customsearch/v1?key=AIzaSyBo4Y4LqHnTqz7XqJPI13kcVQMt-GhuR6A&cx=1392865ebcc984797&q=${queryStr}`);
+}
+
 export {
   getAreaCodeInquiryList,
   getCntrCategoryGrpList,
@@ -69,4 +74,5 @@ export {
   getVolunteerList,
   getVolunteerAreaList,
   getVolunteerDetail,
+  searchGoogleImage
 };

@@ -24,4 +24,16 @@ export default class CommonUtil{
 		return jsonArray;
 		
 	}
+
+	static addComma = (str) => {
+		str = str.replace(/[^0-9]/g, '');
+		var parts = str.toString().split('.');
+		if(str.substring(str.length - 1, str.length)=='.'){
+			str = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,",") +".";
+		} else {
+			str = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,",") + (parts[1] ? "." + parts[1] : "");
+		}
+		return str;
+	}
+
 }
