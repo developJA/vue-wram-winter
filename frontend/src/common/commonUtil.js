@@ -36,4 +36,30 @@ export default class CommonUtil{
 		return str;
 	}
 
+	/**
+	 * 년월일 데이트 포맷
+	 * @param {*} str : 변환할 날짜 "YYYYMMDD"
+	 */
+	static getYMD = (str) => {
+		const date_ymd_div = '.';
+		const date_hms_div = ':';
+		const date = new Date(Number(str.substr(0,4)), Number(str.substr(4,2)) + 1, Number(str.substr(6,2)));
+		const y = date.getFullYear();
+		const m = ("0" + (date.getMonth() + 1)).slice(-2);
+		const d = ("0" + date.getDate()).slice(-2);
+		
+		return y + date_ymd_div + m + date_ymd_div + d;
+	}
+
+	static getDateDiff = (dateStr1, dateStr2) => {
+		// 먼저 받아온 형식의 날짜를 date형식으로
+		const date1 = new Date(dateStr1);
+		const date2 = new Date(dateStr2);
+		// 그 다음에 getTime를 써서 날짜를 계산해줍니다. 밀리초를 반환합니다.
+		const msDiff = date1.getTime() - date2.getTime();
+		// 차이는 (1000밀리초×60초×60분×24시간)
+		return Math.ceil(msDiff / (1000 * 60 * 60 * 24));
+	};
+
+
 }

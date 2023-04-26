@@ -31,7 +31,7 @@
                         <div class="thumb-cont">
                             <p class="title">{{listItem.reprsntSj || listItem.rcritPurps}}</p>
                             <p class="name">{{listItem.rcritrNm}}</p>
-                            <p class="bottom">목표 모금액 : {{listItem.rcritGoalAm}}원</p>
+                            <p class="bottom">목표 모금액 : {{ CommonUtil.addComma(String(listItem.rcritGoalAm)) }}원</p>
                         </div>
                     </li>
                 </ul>

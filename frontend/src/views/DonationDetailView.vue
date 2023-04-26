@@ -32,21 +32,15 @@
                     <tbody>
                         <tr>
                             <td class="bold">모금기간</td>
-                            <td class="left">2023.04.01 ~ 2023.04.23</td>
+                            <td class="left">{{ CommonUtil.getYMD(String(donationInfo.rcritBgnde)) }} ~ {{ CommonUtil.getYMD(String(donationInfo.rcritEndde)) }}</td>
                         </tr>
                         <tr>
                             <td class="bold">활동기간</td>
-                            <td class="left">2주간 진행됩니다.</td>
+                            <td class="left">{{ getDuration() }}일간 진행됩니다.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <!-- <div class="mid-box">
-                <p>직접 기부금 : 2,851,242원</p>
-                <p>참여 기부금 : 2,851,242원</p>
-                <p>특별 기부금 : 2,851,242원</p>
-                <p class="bottom">100명 참여</p>
-            </div> -->
             <div class="desc-cont">
                 <p class="left-quote">"</p>
                 <div class="pdtb15">{{ donationInfo.rcritSj }}</div>
@@ -54,12 +48,26 @@
             </div>
             <div class="border-box">
                 <div>
-                    <p>모금기간 : 2,851,242원</p>
-                    <p>참여 기부금 : 2,851,242원</p>
-                    <p>특별 기부금 : 2,851,242원</p>
-                    <p class="bottom">100명 참여</p></div></div>
+                    <div>000 에서 모집하는 기부 목록 입니다.</div>
+                    <div>
+                        <ul>
+                            <li>
+                                <p>제목</p>
+                                <p>분야 : 국제구제</p>
+                                <p>지역 : 서울</p>
+                            </li>
+                            <li>
+                                <p>제목</p>
+                                <p>분야 : 국제구제</p>
+                                <p>지역 : 서울</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+
 </template>
 
 <script>
@@ -90,6 +98,12 @@ export default {
       }
 
       return url;
+    },
+    getDuration() {
+        const date_start = new Date(this.CommonUtil.getYMD(String(this.donationInfo.rcritBgnde)));
+        const date_end = new Date(this.CommonUtil.getYMD(String(this.donationInfo.rcritEndde)));
+        const diffMSec = this.CommonUtil.getDateDiff(date_end, date_start);
+        return diffMSec;
     },
     searchGoogleImage () {
         // 구글 검색 라이브러리 
