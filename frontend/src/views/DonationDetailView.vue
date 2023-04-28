@@ -48,22 +48,39 @@
             </div>
             <div class="border-box">
                 <div>
-                    <div>000 에서 모집하는 기부 목록 입니다.</div>
-                    <div>
-                        <ul>
-                            <li>
-                                <p>제목</p>
-                                <p>분야 : 국제구제</p>
-                                <p>지역 : 서울</p>
-                            </li>
-                            <li>
-                                <p>제목</p>
-                                <p>분야 : 국제구제</p>
-                                <p>지역 : 서울</p>
-                            </li>
-                        </ul>
-                    </div>
+                    <span class="title">{{ donationInfo.rcritrNm }}</span>
                 </div>
+                <div class="tbl-box">
+                    <table>
+                        <colgroup>
+                            <col style="width:35%">
+                            <col style="width:auto">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td class="bold">모집등록번호</td>
+                                <td class="left">{{ donationInfo.cntrProgrmRegistNo }}</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">주소</td>
+                                <td class="left">{{ donationInfo.postAdres }}</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">홈페이지</td>
+                                <td class="left">{{ donationInfo.hmpgAdres }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="sub-list">
+                <ul>
+                    <li v-for="listItem in centerDntnList" :key="listItem.item">
+                        <span class="title">{{listItem.reprsntSj || listItem.rcritPurps}}</span>
+                        <p><strong class="dark-gray">분야</strong> : {{ listItem.cntrClUpNm }}</p>
+                        <p><strong class="dark-gray">지역</strong> : {{ listItem.rcritArea }}</p>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -72,17 +89,21 @@
 
 <script>
 import 'setimmediate';
+import { getCntrGrpProgramList } from '../api/index.js';
 
 export default {
   data() {
     return {
       donationInfo: {},
       client : null,
+      centerDntnList : [], // 단체별 기부목록
     };
   },
   created() {
     const { query } = this.$router.currentRoute;
     this.donationInfo = query.donationInfo;
+
+    console.log(this.donationInfo);
 
     this.searchGoogleImage();
   },
@@ -109,7 +130,6 @@ export default {
         // 구글 검색 라이브러리 
         const GoogleImages = require('google-images');
         const client = new GoogleImages('1392865ebcc984797', 'AIzaSyBo4Y4LqHnTqz7XqJPI13kcVQMt-GhuR6A');
-        console.log(client);
         
         let keyWord = "";
         const pageStVal = 1;
@@ -131,16 +151,30 @@ export default {
         if(keyWord.length > 0){
             client.search(keyWord,  {page: pageStVal, size: 'large'})
             .then(images => {
-                console.log("images   >>>   ",images);
+                // console.log("images   >>>   ",images);
                 if(images.length > 0){
-                    if(images[0].url.indexOf("map") > 0) return false;
+                    if(images[0].url.indexOf("map") > 0 || images[0].url.indexOf("youtube") > 0) return false;
 
                     document.getElementById("divTitleImg").children[0].src = images[0].url;
                 }
+
+                this.getCenterDonationList(); // 기부단체별 목록조회
             })
         }
         
         
+    },
+    // 기부단체별 목록 조회
+    getCenterDonationList(){
+      const param = {
+        schCntrProgrmRegistNo: this.donationInfo.cntrProgrmRegistNo, 
+      };
+      getCntrGrpProgramList(param)
+      .then((res) => {
+        console.log(res);
+        this.centerDntnList = res.data.response.body.items.item; // 전체 조회   
+        
+      });
     },
   }
 };
@@ -216,5 +250,40 @@ export default {
     font-size : 0.8rem;
     background: #fff;
     padding: 0.5rem;
+}
+.border-box .title {
+    color : #39a6ee;
+    font-size: 1.1rem;
+    padding-top : 1rem;
+    font-weight: 600;
+}
+.border-box .tbl-box {
+    font-size : 0.65rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+.border-box .tbl-box td {
+    padding: 0.3rem 0.2rem;
+}
+.sub-list {
+    text-align: left;
+    font-size:0.9rem;
+}
+.sub-list li {
+    padding: 0.8rem;
+    border: 2px;
+    border-bottom: 0.1rem solid #666666;
+    margin: 0.2rem;
+}
+.sub-list span.title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: -webkit-box;
+    word-break: keep-all;
+    padding : 0.2rem 0rem;
+}
+.sub-list p{
+    text-align:right;
+    font-size:0.75rem;
 }
 </style>
