@@ -7,9 +7,7 @@
             </div>
         </div>
         <div class="container">
-            <div id="map-cont" v-if="currComponent === 'map'">
-                <!-- <kakao-map></kakao-map> -->
-            </div>
+            <kakao-map id="map-cont" v-if="currComponent === 'map'"></kakao-map>
             <region-item class="region-cont" v-if="currComponent === 'region'" @selectRegion="completeSelRegion"/>
             <list-item class="list-cont" v-if="currComponent === 'list'" :regionInfo="sltRegionInfo"/>
         </div>
@@ -20,17 +18,19 @@
 <script>
 import RegionItem from '../components/volunteer/RegionItem.vue';
 import ListItem from '../components/volunteer/ListItem.vue';
+import KakaoMap from '../components/volunteer/KakaoMap.vue';
 
 export default {
   data() {
     return {
-      currComponent: 'region',
+      currComponent: 'map',
       sltRegionInfo: {},
     };
   },
   components: {
     RegionItem,
     ListItem,
+    KakaoMap,
   },
   methods: {
     showSelectPopup() {

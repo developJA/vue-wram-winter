@@ -1,5 +1,7 @@
 <template>
-	<div id="staticMap">
+	<div>
+    <div id="staticMap">
+    </div>
 	</div>
 </template>
 
@@ -15,10 +17,10 @@ export default {
   data() {
     return {
       map: null,
+      myLocation: null,
     };
   },
   created() {
-
   },
   watch: {
 
@@ -31,6 +33,7 @@ export default {
     document.getElementById('staticMap').style.height = `${h}px`;
 
     const script = document.createElement('script');
+    console.log('process.env.VUE_APP_KAKAOMAP_KEY   >>  ', process.env.VUE_APP_KAKAOMAP_KEY);
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${process.env.VUE_APP_KAKAOMAP_KEY}`;
 
     script.onload = () => kakao.maps.load(this.initMap);
@@ -39,13 +42,17 @@ export default {
   },
   methods: {
     initMap() {
-      const staticMapContainer = document.getElementById('staticMap');
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.myLocation = position.coords;
+        console.log('loc  >> ', this.myLocation);
+        const staticMapContainer = document.getElementById('staticMap');
 
-      const staticMapOption = {
-        center: new kakao.maps.LatLng(36.815669, 127.7865791), // 이미지 지도의 중심좌표
-        level: 13, // 이미지 지도의 확대 레벨
-      };
-      this.map = new kakao.maps.Map(staticMapContainer, staticMapOption); // 이미지 지도를 생성
+        const staticMapOption = {
+          center: new kakao.maps.LatLng(this.myLocation.latitude, this.myLocation.longitude), // 이미지 지도의 중심좌표
+          level: 5, // 이미지 지도의 확대 레벨
+        };
+        this.map = new kakao.maps.Map(staticMapContainer, staticMapOption); // 이미지 지도를 생성
+      });
     },
 
   },

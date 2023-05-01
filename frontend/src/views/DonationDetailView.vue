@@ -95,8 +95,8 @@ export default {
   data() {
     return {
       donationInfo: {},
-      client : null,
-      centerDntnList : [], // 단체별 기부목록
+      client: null,
+      centerDntnList: [], // 단체별 기부목록
     };
   },
   created() {
@@ -107,76 +107,72 @@ export default {
 
     this.searchGoogleImage();
   },
-  methods : {
-    // 기부단체 이미지 
+  methods: {
+    // 기부단체 이미지
     drawImage(name) {
-      let url = "";
+      let url = '';
       try {
         url = require(`../assets/img/logo/${name} 로고.png`);
       } catch (err) {
         // console.log('no file error');
-        url = require(`../assets/img/logo/no_image.png`);
+        url = require('../assets/img/logo/no_image.png');
       }
 
       return url;
     },
     getDuration() {
-        const date_start = new Date(this.CommonUtil.getYMD(String(this.donationInfo.rcritBgnde)));
-        const date_end = new Date(this.CommonUtil.getYMD(String(this.donationInfo.rcritEndde)));
-        const diffMSec = this.CommonUtil.getDateDiff(date_end, date_start);
-        return diffMSec;
+      const date_start = new Date(this.CommonUtil.getYMD(String(this.donationInfo.rcritBgnde)));
+      const date_end = new Date(this.CommonUtil.getYMD(String(this.donationInfo.rcritEndde)));
+      const diffMSec = this.CommonUtil.getDateDiff(date_end, date_start);
+      return diffMSec;
     },
-    searchGoogleImage () {
-        // 구글 검색 라이브러리 
-        const GoogleImages = require('google-images');
-        const client = new GoogleImages('1392865ebcc984797', 'AIzaSyBo4Y4LqHnTqz7XqJPI13kcVQMt-GhuR6A');
-        
-        let keyWord = "";
-        const pageStVal = 1;
-        const pageEndVal = 5;
+    searchGoogleImage() {
+      // 구글 검색 라이브러리
+      const GoogleImages = require('google-images');
+      const client = new GoogleImages('1392865ebcc984797', 'AIzaSyBo4Y4LqHnTqz7XqJPI13kcVQMt-GhuR6A');
 
-        let reprsntSj = this.donationInfo.reprsntSj || this.donationInfo.rcritPurps;
-        let includeStrs = ["빈곤", "지원", "모금", "피해", "질병", "구호", "사업"];
-        for(let i=0; i<includeStrs.length; i++){
-            const includeStr = includeStrs[i];
-            if(reprsntSj.includes(includeStr)){
-                const _before = reprsntSj.split(includeStr)[0].trim();
-                const strtIdx = _before.lastIndexOf(" ");
-                keyWord = _before.substr(strtIdx+1) + includeStr;
-                break;
+      let keyWord = '';
+      const pageStVal = 1;
+
+      const reprsntSj = this.donationInfo.reprsntSj || this.donationInfo.rcritPurps;
+      const includeStrs = ['빈곤', '지원', '모금', '피해', '질병', '구호', '사업'];
+      for (let i = 0; i < includeStrs.length; i++) {
+        const includeStr = includeStrs[i];
+        if (reprsntSj.includes(includeStr)) {
+          const _before = reprsntSj.split(includeStr)[0].trim();
+          const strtIdx = _before.lastIndexOf(' ');
+          keyWord = _before.substr(strtIdx + 1) + includeStr;
+          break;
+        }
+      }
+      console.log('keyWord   : ', keyWord);
+
+      if (keyWord.length > 0) {
+        client.search(keyWord, { page: pageStVal, size: 'large' })
+          .then((images) => {
+            // console.log("images   >>>   ",images);
+            if (images.length > 0) {
+              if (images[0].url.indexOf('map') > 0 || images[0].url.indexOf('youtube') > 0) return false;
+
+              document.getElementById('divTitleImg').children[0].src = images[0].url;
             }
-        }
-        console.log("keyWord   : ",keyWord);
 
-        if(keyWord.length > 0){
-            client.search(keyWord,  {page: pageStVal, size: 'large'})
-            .then(images => {
-                // console.log("images   >>>   ",images);
-                if(images.length > 0){
-                    if(images[0].url.indexOf("map") > 0 || images[0].url.indexOf("youtube") > 0) return false;
-
-                    document.getElementById("divTitleImg").children[0].src = images[0].url;
-                }
-
-                this.getCenterDonationList(); // 기부단체별 목록조회
-            })
-        }
-        
-        
+            this.getCenterDonationList(); // 기부단체별 목록조회
+          });
+      }
     },
     // 기부단체별 목록 조회
-    getCenterDonationList(){
+    getCenterDonationList() {
       const param = {
-        schCntrProgrmRegistNo: this.donationInfo.cntrProgrmRegistNo, 
+        schCntrProgrmRegistNo: this.donationInfo.cntrProgrmRegistNo,
       };
       getCntrGrpProgramList(param)
-      .then((res) => {
-        console.log(res);
-        this.centerDntnList = res.data.response.body.items.item; // 전체 조회   
-        
-      });
+        .then((res) => {
+          console.log(res);
+          this.centerDntnList = res.data.response.body.items.item; // 전체 조회
+        });
     },
-  }
+  },
 };
 </script>
 

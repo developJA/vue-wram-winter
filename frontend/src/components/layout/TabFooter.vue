@@ -1,26 +1,25 @@
 <template>
 	<footer>
 		<div class="menuWrap">
-			<router-link to="/home" class="footer-home">홈</router-link>
-    		<router-link to="/volunteer" class="footer-volunteer">봉사</router-link>
-			<router-link to="/donation" class="footer-donation">기부</router-link>
-    		<router-link to="/my" class="footer-my">MY</router-link>
+			<router-link to="/home" replace class="footer-home">홈</router-link>
+    		<router-link to="/volunteer" replace class="footer-volunteer">봉사</router-link>
+			<router-link to="/donation" replace class="footer-donation">기부</router-link>
+    		<router-link to="/my" replace class="footer-my">MY</router-link>
 		</div>
 	</footer>
 </template>
 
 <script>
 export default {
-}
+};
 </script>
-
 
 <style scoped>
 
 footer{
-	width:100%; 
-	text-align:center; 
-	position:fixed; 
+	width:100%;
+	text-align:center;
+	position:fixed;
 	z-index: 999;
 	bottom : 0;
 	box-shadow:  -5px 0px 8px 0px #636363;

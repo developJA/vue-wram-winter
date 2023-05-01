@@ -29,7 +29,7 @@
                     </div>
                     <p class="bold">{{ listItem.progrmSj }}</p>
                     <p class="bold blue">{{ listItem.nanmmbyNm }}</p>
-                    <p class="">{{ listItem.progrmBgnde }} ~ {{ listItem.progrmEndde }}</p>
+                    <p class="">{{ CommonUtil.getYMD(listItem.progrmBgnde) }} ~ {{ CommonUtil.getYMD(listItem.progrmEndde) }}</p>
                     <p class="bold">모집분야 :
                       <strong class="dark-gray">{{ listItem.srvcClCode }}</strong>
                       </p>

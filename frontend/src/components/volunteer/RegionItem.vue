@@ -7,17 +7,7 @@
             <em> > </em>
             <span class="active">읍/면/동</span> -->
         </div>
-        <div id="divAreaNmList" class="thumb-box">
-            <!-- <button class="on">강원도</button>
-            <button>경기도</button>
-            <button>경상남도</button>
-            <button>경상북도</button>
-            <button>광주광역시</button>
-            <button>대구광역시</button>
-            <button>대전광역시</button>
-            <button>부산광역시</button>
-            <button>서울특별시</button>
-            <button>세종특별자치시</button> -->
+        <div id="divAreaNmList" class="thumb-box" v-if="listFlag()">
             <button v-for="region in sidoList" class="post" :key="region.item" @click="activeRegion(region, $event)">
                 {{region.sidoNm}}
             </button>
@@ -52,6 +42,9 @@ export default {
     this.getSidoInfo();
   },
   methods: {
+    listFlag() {
+      return (this.sidoList.length > 0) || (this.gugunList.length > 0);
+    },
     getSidoInfo() {
       const param = {
         schSido: '',
@@ -79,6 +72,7 @@ export default {
         });
     },
     getGugunInfo(sidoNm) {
+      console.log('get gugun info >>>>>', sidoNm);
       const param = {
         schSido: sidoNm,
       };
@@ -89,11 +83,11 @@ export default {
           const { body } = res.data.response;
           const items = body.items.item;
 
-          // console.log('getGugunList   >>>   ', items);
-          if (typeof items === 'object') {
-            this.gugunList = [items];
-          } else {
+          console.log('getGugunList   >>>   ', items);
+          if (Array.isArray(items)) {
             this.gugunList = items;
+          } else {
+            this.gugunList = [items];
           }
 
           this.rgnlevel = 2; // 레벨 2
@@ -106,8 +100,9 @@ export default {
         });
     },
     activeRegion(obj, event) {
-      if (document.getElementById('divAreaNmList').querySelector('.on') != null) { // 선택된 element가 있을 경우
-        document.getElementById('divAreaNmList').querySelector('.on').classList.remove('on');
+      const parentNode = event.currentTarget.parentElement;
+      if (parentNode.querySelector('.on') != null) { // 선택된 element가 있을 경우
+        parentNode.querySelector('.on').classList.remove('on');
       }
       event.currentTarget.classList.add('on');
 

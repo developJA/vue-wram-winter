@@ -58,10 +58,10 @@ export default {
       categories: [],
       sltCateCd: '', // 선택한 카테고리코드
       sltCateNm: '', // 선택한 카테고리명
-      donationAllList : [],
+      donationAllList: [],
       donationList: [],
-      fs : null,    // 파일시스템 모듈
-      totCnt : 0,   // 기부 총 건수
+      fs: null, // 파일시스템 모듈
+      totCnt: 0, // 기부 총 건수
     };
   },
   created() {
@@ -71,7 +71,7 @@ export default {
     getCateList() {
       getCntrRealmCodeList()
         .then((res) => {
-          this.categories.push({"code" : "", "codeNm" : "전체"})
+          this.categories.push({ code: '', codeNm: '전체' });
           this.categories = this.categories.concat(res.data.response.body.items.item);
 
           this.getDonationTotCount();
@@ -90,68 +90,65 @@ export default {
 
       this.setDonationList(obj.code);
     },
-    getDonationTotCount(){
+    getDonationTotCount() {
       const param = {
         schCntrClCode: this.sltCateCd,
       };
       getCntrGrpProgramList(param)
-      .then((res) => {
-        this.totCnt = res.data.response.body.totalCount;
-        
-        console.log('리스트  총건수 : ', this.totCnt);
-        this.getDonationList();
-      });
+        .then((res) => {
+          this.totCnt = res.data.response.body.totalCount;
+
+          console.log('리스트  총건수 : ', this.totCnt);
+          this.getDonationList();
+        });
     },
     // 모든 목록 조회
-    getDonationList(){
+    getDonationList() {
       const param = {
         numOfRows: this.totCnt, // 전체 조회
       };
       getCntrGrpProgramList(param)
-      .then((res) => {
+        .then((res) => {
+          this.donationAllList = res.data.response.body.items.item; // 전체 조회
+          this.setDonationList('');
 
-        this.donationAllList = res.data.response.body.items.item; // 전체 조회   
-        this.setDonationList("");
-        
-        document.getElementsByClassName("btn-cate")[0].classList.add('on'); // '전체'버튼 활성화
-      });
+          document.getElementsByClassName('btn-cate')[0].classList.add('on'); // '전체'버튼 활성화
+        });
     },
     // 카테고리에 따른 리스트 세팅
-    setDonationList(code){
-        this.donationList = []; // 초기화
+    setDonationList(code) {
+      this.donationList = []; // 초기화
 
-        if(code == ""){ // 전체
-            this.donationList = this.donationAllList;
-        }else{
-            const list = this.donationAllList;
-            this.donationList = list.filter(item => {
-                return item.cntrClUpNm.includes(this.sltCateNm);
-            });
-            console.log("sltCateNm  : ",this.sltCateNm);
-            // console.log("donationList  : ",JSON.stringify(this.donationList));
-        }
+      if (code == '') { // 전체
+        this.donationList = this.donationAllList;
+      } else {
+        const list = this.donationAllList;
+        this.donationList = list.filter((item) => item.cntrClUpNm.includes(this.sltCateNm));
+        console.log('sltCateNm  : ', this.sltCateNm);
+        // console.log("donationList  : ",JSON.stringify(this.donationList));
+      }
     },
     loadImage(obj) {
-      let url = "";
+      let url = '';
       try {
         url = require(`../assets/img/logo/${obj.rcritrNm} 로고.png`);
       } catch (err) {
         // console.log('no file error');
-        url = require(`../assets/img/logo/no_image.png`);
+        url = require('../assets/img/logo/no_image.png');
       }
 
       return url;
     },
     // 리스트 선택
     selectItem(obj) {
-      console.log("sel obj   : ",obj);
-        this.$router.push({
-            path: 'donationDetail',
-            query: {
-              donationInfo: obj,
-            },
-        });
-    }
+      console.log('sel obj   : ', obj);
+      this.$router.push({
+        path: 'donationDetail',
+        query: {
+          donationInfo: obj,
+        },
+      });
+    },
   },
 
 };
@@ -193,14 +190,6 @@ export default {
     font-size: 11px;
 }
 .btn-cate {
-    /* border-radius: 8px;
-    border: none;
-    width: 5.3rem;
-    font-size: 13px;
-    margin-right: 1rem;
-    padding: 10px 5px;
-    text-align: center;
-    height: 3rem; */
     border: none;
     background-color: #ffffff;
     color: #333333;
@@ -214,7 +203,6 @@ export default {
     margin: 0.3rem;
     box-shadow: 1px 1px 1px 1px #9c9c9c;
     font-size: 0.7rem;
-    /* margin-right: 1rem; */
 }
 .btn-cate.on {
     background-color: #eee;
