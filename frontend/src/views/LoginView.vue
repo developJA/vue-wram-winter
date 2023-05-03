@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="btn-box">
-                        <button type="button" class="btn-txt dft" @click="moveMain">로그인</button>
+                        <button type="button" class="btn-txt dft" @click="doLogin">로그인</button>
                     </div>
                 </div>
             </div>
@@ -40,11 +40,27 @@
 </template>
 
 <script>
+import { loginApi } from '../server/api.js'
+
 export default {
     methods : {
         moveMain(){
             this.$router.replace({ path: '/home' })
         },
+        doLogin() {
+            const _this = this;
+            const param = {
+                id : document.getElementById("inpId").value,
+                pw : document.getElementById("inpPw").value,
+            }
+            loginApi(param, function(rd){
+                if(rd.status == "SUCCESS"){
+                    _this.moveMain();
+                }else{
+                    _this.$popAlert("로그인에 실패하였습니다.");
+                }
+            });
+        }
     }
 }
 </script>

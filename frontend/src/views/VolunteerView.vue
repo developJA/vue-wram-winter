@@ -52,7 +52,6 @@ export default {
       this.currComponent = document.getElementById('inpSelBox').getAttribute('data-value');
     },
     completeSelRegion(obj) {
-      console.log('completeSelRegion   !!!   ', obj);
       this.sltRegionInfo = obj;
       this.currComponent = 'list';
     },

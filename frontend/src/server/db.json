@@ -1,0 +1,47 @@
+{
+  "user": [
+    {
+      "id": "master",
+      "pw": "987654321"
+    },
+    {
+      "id": "user1",
+      "pw": "1234"
+    }
+  ],
+  "bookmarks": [
+    {
+      "user_id": "master",
+      "type": "volunteer",
+      "item_id": "2711"
+    },
+    {
+      "user_id": "user1",
+      "type": "volunteer",
+      "item_id": "2711"
+    },
+    {
+      "id": "user1",
+      "type": "donation",
+      "item_id": 278
+    },
+    {
+      "user_id": "user1",
+      "type": "donation",
+      "item_id": 780,
+      "id": "z7vkLMb"
+    },
+    {
+      "user_id": "user1",
+      "type": "donation",
+      "item_id": 780,
+      "id": "JVuD64p"
+    },
+    {
+      "user_id": "user1",
+      "type": "donation",
+      "item_id": 780,
+      "id": "Nglk5Km"
+    }
+  ]
+}

@@ -79,7 +79,7 @@ const router = new Router({
       },
     },
     {
-      path: '/donationDetail',
+      path: '/donation/donationDetail',
       name: 'donationDetail',
       component: DonationDetailView,
       meta: {
@@ -88,7 +88,7 @@ const router = new Router({
       },
     },
     {
-      path: '/volunteerDetail',
+      path: '/volunteer/volunteerDetail',
       name: 'volunteerDetail',
       component: VolunteerDetailView,
       meta: {

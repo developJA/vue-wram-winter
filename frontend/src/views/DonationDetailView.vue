@@ -1,24 +1,13 @@
 <template>
     <div>
         <div id="divTitleImg" class="banner-img-cont">
+            <div class="bookmark" @click="registBookmark">
+                <i class="ico-fav"></i>
+                <span class="a11y-blind">즐겨찾기</span>
+            </div>
             <img :src="drawImage(donationInfo.rcritrNm)">
         </div>
         <div class="cont-wrap">
-            <!-- <div class="top-box">
-                <span class="tag">#튀르키예 - 시리아긴급모금</span>
-                <p class="num">4,757,765,500원</p>
-            </div>
-            <div class="mid-box">
-                <p>직접 기부금 : 2,851,242원</p>
-                <p>참여 기부금 : 2,851,242원</p>
-                <p>특별 기부금 : 2,851,242원</p>
-                <p class="bottom">100명 참여</p>
-            </div>
-            <div class="desc-cont">
-                <p class="left-quote">"</p>
-                <div class="pdtb15">실제로 에르도안 대통령은 이슬람주의와 민족주의를 앞세워 적극적인 주권 행사를 하고 있다. 2020년 7월 유네스코 유산인 아야 소피아 박물관을 이슬람 사원인 모스크로 전환하는 법령을 발표한 것도 이와 같은 맥락에서다. 과거 튀르키예 공화국을 설립한 아타튀르크 전 대통령이 이슬람식의 술탄제를 폐지하고 서구화를 꾀한 것과는 반대되는 행보다. </div>
-                <p class="right-quote">"</p>
-            </div> -->
             <div class="top-box">
                 <span class="tag">#{{ donationInfo.reprsntSj }}</span>
                 <p class="num">{{ CommonUtil.addComma(String(donationInfo.rcritGoalAm)) }}원</p>
@@ -90,6 +79,7 @@
 <script>
 import 'setimmediate';
 import { getCntrGrpProgramList } from '../api/index.js';
+import { regBookmarksApi } from '../server/api.js';
 
 export default {
   data() {
@@ -100,12 +90,16 @@ export default {
     };
   },
   created() {
+    // query로 넘겨받은 donation정보 
     const { query } = this.$router.currentRoute;
     this.donationInfo = query.donationInfo;
-
-    console.log(this.donationInfo);
+    console.log("donationInfo  >>> ", this.donationInfo);
 
     this.searchGoogleImage();
+  },
+  mounted () {
+    // 푸터 버튼 활성화 => 기부
+    this.EventBus.$emit("activeFooter", {"url" : "donation"});
   },
   methods: {
     // 기부단체 이미지
@@ -172,6 +166,19 @@ export default {
           this.centerDntnList = res.data.response.body.items.item; // 전체 조회
         });
     },
+    // 즐겨찾기 추가
+    registBookmark(){
+        const _this = this;
+        const param = {
+            user_id : "user1",
+            type : "donation",
+            item_id : this.donationInfo.rcritrId
+        }
+        regBookmarksApi(param, function(rd){
+            _this.$popAlert("즐겨찾기에 추가되었습니다.");
+            document.getElementsByClassName("bookmark")[0].classList.add("on");
+        })
+    }
   },
 };
 </script>

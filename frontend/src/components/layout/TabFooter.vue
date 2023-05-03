@@ -1,16 +1,33 @@
 <template>
 	<footer>
-		<div class="menuWrap">
-			<router-link to="/home" replace class="footer-home">홈</router-link>
-    		<router-link to="/volunteer" replace class="footer-volunteer">봉사</router-link>
-			<router-link to="/donation" replace class="footer-donation">기부</router-link>
-    		<router-link to="/my" replace class="footer-my">MY</router-link>
+		<div class="menuWrap footer">
+			<router-link to="/home" replace class="home">홈</router-link>
+    		<router-link to="/volunteer" replace class="volunteer">봉사</router-link>
+			<router-link to="/donation" replace class="donation">기부</router-link>
+    		<router-link to="/my" replace class="my">MY</router-link>
 		</div>
 	</footer>
 </template>
 
 <script>
 export default {
+	data() {
+		return{
+			currIconNm : "",	// 활성화된 아이콘
+		}
+	},
+	mounted() {
+		this.EventBus.$off('activeFooter');
+		this.EventBus.$on("activeFooter", (param, callback)=>{
+			// this.currIconNm = param.url;
+			// console.log('active footer!   url :  ', this.currIconNm);
+		});
+	},
+	methods : {
+		activeIcon(event) {
+			console.log("this   >> ",event);
+		}
+	}
 };
 </script>
 
@@ -50,35 +67,35 @@ footer .menuWrap a.router-link-active{
 	color : #39a6ee;
 }
 
-footer .footer-home{
+footer .footer .home{
 	background-image: url("../../assets/img/icon-home.png");
 	background-size: 24px auto;
 }
-footer .footer-volunteer{
+footer .footer .volunteer{
 	background-image: url("../../assets/img/icon-volunteer.png");
 	background-size: 28px auto;
 }
-footer .footer-donation{
+footer .footer .donation{
 	background-image: url("../../assets/img/icon-donate.png");
 	background-size: 28px auto;
 }
-footer .footer-my{
+footer .footer .my{
 	background-image: url("../../assets/img/icon-my.png");
 	background-size: 25px auto;
 }
-footer .footer-home.router-link-active{
+footer .footer .home.router-link-active{
 	background-image: url("../../assets/img/icon-home-blue.png");
 	background-size: 24px auto;
 }
-footer .footer-volunteer.router-link-active{
+footer .footer .volunteer.router-link-active{
 	background-image: url("../../assets/img/icon-volunteer-blue.png");
 	background-size: 28px auto;
 }
-footer .footer-donation.router-link-active{
+footer .footer .donation.router-link-active{
 	background-image: url("../../assets/img/icon-donate-blue.png");
 	background-size: 28px auto;
 }
-footer .footer-my.router-link-active{
+footer .footer .my.router-link-active{
 	background-image: url("../../assets/img/icon-my-blue.png");
 	background-size: 25px auto;
 }

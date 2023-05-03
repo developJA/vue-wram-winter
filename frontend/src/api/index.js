@@ -1,11 +1,27 @@
 import axios from 'axios';
+import EventBus from '@/common/EventBus';
 
 // 1. HTTP Request & Response와 관련된 기본 설정
 const config = {
   baseUrl: '/openapi/service/rest',
   key: 'czDub2E2d3LEXxD6Oc%2FG9Pzpc1IF9B7WiEUeghL9oSO0V7bFP8PRYBODUdoVNG2knFQcdXqJpG8HwPXi%2BuCxSw%3D%3D',
   lang: 'ko-KR',
+  fakeServer : 'http://localhost:3000',
 };
+
+axios.interceptors.request.use(
+  config => {
+    EventBus.$emit('showIndicator', true);
+    return config;
+  }
+);
+
+axios.interceptors.response.use(
+  res => {
+    EventBus.$emit('showIndicator', false);
+    return res;
+  }
+)
 
 // 2. API 함수들을 정리
 // 지역코드조회
@@ -66,6 +82,22 @@ function searchGoogleImage(queryStr){
   return axios.get(`https://www.googleapis.com/customsearch/v1?key=AIzaSyBo4Y4LqHnTqz7XqJPI13kcVQMt-GhuR6A&cx=1392865ebcc984797&q=${queryStr}`);
 }
 
+/* 로컬 DB */
+// 로그인
+function getUser(){
+  return axios.get(`${config.fakeServer}/user`);
+}
+
+// 즐겨찾기 가져오기
+function getBookmarks(){
+  return axios.get(`${config.fakeServer}/bookmarks`);
+}
+
+// 즐겨찾기 추가하기
+function postBookmarks(sendObj){
+  return axios.post(`${config.fakeServer}/bookmarks`, sendObj);
+}
+
 export {
   getAreaCodeInquiryList,
   getCntrCategoryGrpList,
@@ -74,5 +106,8 @@ export {
   getVolunteerList,
   getVolunteerAreaList,
   getVolunteerDetail,
-  searchGoogleImage
+  searchGoogleImage,
+  getUser,
+  getBookmarks,
+  postBookmarks,
 };

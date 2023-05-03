@@ -66,7 +66,7 @@ export default {
   methods: {
     moveDetail(obj) {
       this.$router.push({
-        path: 'volunteerDetail',
+        path: 'volunteer/volunteerDetail',
         query: {
           prgrmNo: obj.progrmRegistNo,
         },
