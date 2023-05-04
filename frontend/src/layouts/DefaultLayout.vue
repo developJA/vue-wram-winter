@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header></Header>
-    <router-view class="scroll-wrap"></router-view>
+    <router-view class="container"></router-view>
     <tab-footer></tab-footer>
   </div>
 </template>

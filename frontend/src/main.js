@@ -13,9 +13,7 @@ import GlobalComponent from './common/global.component';
 import EventBus, { $popAlert, $popConfirm, $popList } from '@/common/EventBus';
 
 import CommonUtil from './common/commonUtil.js';
-
-// import plugins from './plugin';
-// Vue.use(plugins);
+import Common from './common/common.js';
 
 import api from './plugins/api.js';
 
@@ -25,6 +23,7 @@ Vue.prototype.$popAlert = $popAlert;
 Vue.prototype.$popConfirm = $popConfirm;
 Vue.prototype.$popList = $popList;
 Vue.prototype.CommonUtil = CommonUtil;
+Vue.prototype.Common = Common;
 Vue.prototype.EventBus = EventBus;
 Vue.use(api);
 

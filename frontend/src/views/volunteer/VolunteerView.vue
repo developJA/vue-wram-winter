@@ -1,24 +1,27 @@
 <template>
-    <div>
-        <div class="srch-wrap">
-            <div class="inp-text select" @click="showSelectPopup">
-                <input id="inpSelBox" type="text" readonly value="내위치">
-                <button type="button" class="btn-select"></button>
-            </div>
-        </div>
-        <div class="container">
-            <kakao-map id="map-cont" v-if="currComponent === 'map'"></kakao-map>
-            <region-item class="region-cont" v-if="currComponent === 'region'" @selectRegion="completeSelRegion"/>
-            <list-item class="list-cont" v-if="currComponent === 'list'" :regionInfo="sltRegionInfo"/>
-        </div>
-
+  <div>
+    <div class="content">
+      <div>
+          <div class="srch-wrap">
+              <div class="inp-text select" @click="showSelectPopup">
+                  <input id="inpSelBox" type="text" readonly value="내위치">
+                  <button type="button" class="btn-select"></button>
+              </div>
+          </div>
+          <div class="scroll-wrap">
+              <kakao-map id="map-cont" v-if="currComponent === 'map'"></kakao-map>
+                <region-item class="region-cont" v-if="currComponent === 'region'" @selectRegion="completeSelRegion"/>
+                <list-item class="list-cont" v-if="currComponent === 'list'" :regionInfo="sltRegionInfo"/>
+          </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-import RegionItem from '../components/volunteer/RegionItem.vue';
-import ListItem from '../components/volunteer/ListItem.vue';
-import KakaoMap from '../components/volunteer/KakaoMap.vue';
+import RegionItem from '../../components/volunteer/RegionItem.vue';
+import ListItem from '../../components/volunteer/ListItem.vue';
+import KakaoMap from '../../components/volunteer/KakaoMap.vue';
 
 export default {
   data() {
@@ -66,7 +69,7 @@ export default {
     display: inline-block;
     width: 1.6rem;
     height: 1.6rem;
-    background: #ffffff url(../assets/img/common/btn-select.png) center center no-repeat;
+    background: #ffffff url(../../assets/img/common/btn-select.png) center center no-repeat;
     background-position: center;
     background-size: 1.6rem;
     vertical-align: middle;

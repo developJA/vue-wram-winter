@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="container">
+        <div class="content">
+          
             <div id="divCateWrap" class="category-wrap">
                 <swiper class="swiper mrg10" :options="swiperOption">
                     <swiper-slide v-for="cateItem in categories" v-bind:key="cateItem.item" ref="VuePerson">
@@ -11,38 +12,39 @@
 
                 </swiper>
             </div>
-
-            <div class="list-wrap">
-                <ul id="ulDonatList" v-if="donationList.length > 0">
-                    <!-- <li>
-                        <div class="thumb-img">
-                            <img src="" alt="">
-                        </div>
-                        <div class="thumb-cont">
-                            <p class="title">사망자만 5만3천 명이 넘었습니다.</p>
-                            <p class="name">사회복지법인 세이브더칠드런코리아</p>
-                            <p class="bottom">목표 모금액 : 150,000원</p>
-                        </div>
-                    </li> -->
-                    <li v-for="listItem in donationList" :key="listItem.item"  @click="selectItem(listItem)">
-                        <div class="thumb-img">
-                            <img :src="loadImage(listItem)" alt="">
-                        </div>
-                        <div class="thumb-cont">
-                            <p class="title">{{listItem.reprsntSj || listItem.rcritPurps}}</p>
-                            <p class="name">{{listItem.rcritrNm}}</p>
-                            <p class="bottom">목표 모금액 : {{ CommonUtil.addComma(String(listItem.rcritGoalAm)) }}원</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <div class="scroll-wrap">
+              <div class="list-wrap">
+                  <ul id="ulDonatList" v-if="donationList.length > 0">
+                      <!-- <li>
+                          <div class="thumb-img">
+                              <img src="" alt="">
+                          </div>
+                          <div class="thumb-cont">
+                              <p class="title">사망자만 5만3천 명이 넘었습니다.</p>
+                              <p class="name">사회복지법인 세이브더칠드런코리아</p>
+                              <p class="bottom">목표 모금액 : 150,000원</p>
+                          </div>
+                      </li> -->
+                      <li v-for="listItem in donationList" :key="listItem.item"  @click="selectItem(listItem)">
+                          <div class="thumb-img">
+                              <img :src="loadImage(listItem)" alt="">
+                          </div>
+                          <div class="thumb-cont">
+                              <p class="title">{{listItem.reprsntSj || listItem.rcritPurps}}</p>
+                              <p class="name">{{listItem.rcritrNm}}</p>
+                              <p class="bottom">목표 모금액 : {{ CommonUtil.addComma(String(listItem.rcritGoalAm)) }}원</p>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+          </div>
         </div>
     </div>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
-import { getCntrRealmCodeList, getCntrGrpProgramList } from '../api/index.js';
+import { getCntrRealmCodeList, getCntrGrpProgramList } from '../../api/index.js';
 import 'swiper/css/swiper.css';
 
 export default {
@@ -131,10 +133,10 @@ export default {
     loadImage(obj) {
       let url = '';
       try {
-        url = require(`../assets/img/logo/${obj.rcritrNm} 로고.png`);
+        url = require(`@/assets/img/logo/${obj.rcritrNm} 로고.png`);
       } catch (err) {
         // console.log('no file error');
-        url = require('../assets/img/logo/no_image.png');
+        url = require('@/assets/img/logo/no_image.png');
       }
 
       return url;

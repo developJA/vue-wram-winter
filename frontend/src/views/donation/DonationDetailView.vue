@@ -1,45 +1,19 @@
 <template>
     <div>
-        <div id="divTitleImg" class="banner-img-cont">
-            <div class="bookmark" @click="registBookmark">
-                <i class="ico-fav"></i>
-                <span class="a11y-blind">즐겨찾기</span>
-            </div>
-            <img :src="drawImage(donationInfo.rcritrNm)">
-        </div>
-        <div class="cont-wrap">
-            <div class="top-box">
-                <span class="tag">#{{ donationInfo.reprsntSj }}</span>
-                <p class="num">{{ CommonUtil.addComma(String(donationInfo.rcritGoalAm)) }}원</p>
-            </div>
-            <div class="tbl-box" style="">
-                <table>
-                    <colgroup>
-                        <col style="width:35%">
-                        <col style="width:auto">
-                    </colgroup>
-                    <tbody>
-                        <tr>
-                            <td class="bold">모금기간</td>
-                            <td class="left">{{ CommonUtil.getYMD(String(donationInfo.rcritBgnde)) }} ~ {{ CommonUtil.getYMD(String(donationInfo.rcritEndde)) }}</td>
-                        </tr>
-                        <tr>
-                            <td class="bold">활동기간</td>
-                            <td class="left">{{ getDuration() }}일간 진행됩니다.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="desc-cont">
-                <p class="left-quote">"</p>
-                <div class="pdtb15">{{ donationInfo.rcritSj }}</div>
-                <p class="right-quote">"</p>
-            </div>
-            <div class="border-box">
-                <div>
-                    <span class="title">{{ donationInfo.rcritrNm }}</span>
+        <div class="scroll-wrap">
+            <div id="divTitleImg" class="banner-img-cont">
+                <div class="bookmark" @click="registBookmark">
+                    <i class="ico-fav"></i>
+                    <span class="a11y-blind">즐겨찾기</span>
                 </div>
-                <div class="tbl-box">
+                <img :src="drawImage(donationInfo.rcritrNm)">
+            </div>
+            <div class="cont-wrap">
+                <div class="top-box">
+                    <span class="tag">#{{ donationInfo.reprsntSj }}</span>
+                    <p class="num">{{ CommonUtil.addComma(String(donationInfo.rcritGoalAm)) }}원</p>
+                </div>
+                <div class="tbl-box" style="">
                     <table>
                         <colgroup>
                             <col style="width:35%">
@@ -47,29 +21,57 @@
                         </colgroup>
                         <tbody>
                             <tr>
-                                <td class="bold">모집등록번호</td>
-                                <td class="left">{{ donationInfo.cntrProgrmRegistNo }}</td>
+                                <td class="bold">모금기간</td>
+                                <td class="left">{{ CommonUtil.getYMD(String(donationInfo.rcritBgnde)) }} ~ {{ CommonUtil.getYMD(String(donationInfo.rcritEndde)) }}</td>
                             </tr>
                             <tr>
-                                <td class="bold">주소</td>
-                                <td class="left">{{ donationInfo.postAdres }}</td>
-                            </tr>
-                            <tr>
-                                <td class="bold">홈페이지</td>
-                                <td class="left">{{ donationInfo.hmpgAdres }}</td>
+                                <td class="bold">활동기간</td>
+                                <td class="left">{{ getDuration() }}일간 진행됩니다.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="sub-list">
-                <ul>
-                    <li v-for="listItem in centerDntnList" :key="listItem.item">
-                        <span class="title">{{listItem.reprsntSj || listItem.rcritPurps}}</span>
-                        <p><strong class="dark-gray">분야</strong> : {{ listItem.cntrClUpNm }}</p>
-                        <p><strong class="dark-gray">지역</strong> : {{ listItem.rcritArea }}</p>
-                    </li>
-                </ul>
+                <div class="desc-cont">
+                    <p class="left-quote">"</p>
+                    <div class="pdtb15">{{ donationInfo.rcritSj }}</div>
+                    <p class="right-quote">"</p>
+                </div>
+                <div class="border-box">
+                    <div>
+                        <span class="title">{{ donationInfo.rcritrNm }}</span>
+                    </div>
+                    <div class="tbl-box">
+                        <table>
+                            <colgroup>
+                                <col style="width:35%">
+                                <col style="width:auto">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td class="bold">모집등록번호</td>
+                                    <td class="left">{{ donationInfo.cntrProgrmRegistNo }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bold">주소</td>
+                                    <td class="left">{{ donationInfo.postAdres }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bold">홈페이지</td>
+                                    <td class="left">{{ donationInfo.hmpgAdres }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="sub-list">
+                    <ul>
+                        <li v-for="listItem in centerDntnList" :key="listItem.item">
+                            <span class="title">{{listItem.reprsntSj || listItem.rcritPurps}}</span>
+                            <p><strong class="dark-gray">분야</strong> : {{ listItem.cntrClUpNm }}</p>
+                            <p><strong class="dark-gray">지역</strong> : {{ listItem.rcritArea }}</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -78,8 +80,8 @@
 
 <script>
 import 'setimmediate';
-import { getCntrGrpProgramList } from '../api/index.js';
-import { regBookmarksApi } from '../server/api.js';
+import { getCntrGrpProgramList } from '../../api/index.js';
+import { regBookmarksApi } from '../../server/api.js';
 
 export default {
   data() {
@@ -106,10 +108,10 @@ export default {
     drawImage(name) {
       let url = '';
       try {
-        url = require(`../assets/img/logo/${name} 로고.png`);
+        url = require(`@/assets/img/logo/${name} 로고.png`);
       } catch (err) {
         // console.log('no file error');
-        url = require('../assets/img/logo/no_image.png');
+        url = require('@/assets/img/logo/no_image.png');
       }
 
       return url;
@@ -172,6 +174,11 @@ export default {
         const param = {
             user_id : "user1",
             type : "donation",
+            typeNm : "기부",
+            title : this.donationInfo.reprsntSj,
+            groupNm : this.donationInfo.rcritrNm,
+            startDt : this.donationInfo.rcritBgnde,
+            endDt : this.donationInfo.rcritEndde,
             item_id : this.donationInfo.rcritrId
         }
         regBookmarksApi(param, function(rd){
@@ -222,7 +229,7 @@ export default {
     font-size: small;
 }
 .left-quote {
-    background-image: url('../assets/img/icon-left-quote.png');
+    background-image: url('../../assets/img/icon-left-quote.png');
     background-repeat: no-repeat;
     color: transparent;
     background-size: contain;
@@ -230,7 +237,7 @@ export default {
     margin-left: 45%
 }
 .right-quote {
-    background-image: url('../assets/img/icon-right-quote.png');
+    background-image: url('../../assets/img/icon-right-quote.png');
     background-repeat: no-repeat;
     color: transparent;
     background-size: contain;

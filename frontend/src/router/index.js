@@ -2,14 +2,15 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Define from '@/common/define';
 
-import IntroView from '../views/IntroView.vue';
-import LoginView from '../views/LoginView.vue';
-import HomeView from '../views/HomeView.vue';
-import VolunteerView from '../views/VolunteerView.vue';
-import DonationView from '../views/DonationView.vue';
-import MyView from '../views/MyView.vue';
-import DonationDetailView from '../views/DonationDetailView.vue';
-import VolunteerDetailView from '../views/VolunteerDetailView.vue';
+import IntroView from '../views/common/IntroView.vue';
+import LoginView from '../views/common/LoginView.vue';
+import HomeView from '../views/home/HomeView.vue';
+import VolunteerView from '../views/volunteer/VolunteerView.vue';
+import DonationView from '../views/donation/DonationView.vue';
+import MyView from '../views/my/MyView.vue';
+import DonationDetailView from '../views/donation/DonationDetailView.vue';
+import VolunteerDetailView from '../views/volunteer/VolunteerDetailView.vue';
+import BookmarksView from '../views/my/BookmarksView.vue';
 
 // lazyload 적용
 // () => import(/* webpackChunkName: "intro" */'views/intro');
@@ -93,6 +94,15 @@ const router = new Router({
       component: VolunteerDetailView,
       meta: {
         layout: Define.LAYOUT_TYPE.DEFAULT,
+        className: 'dashboard',
+      },
+    },
+    {
+      path: '/my/bookmarks',
+      name: 'bookmarks',
+      component: BookmarksView,
+      meta: {
+        layout: Define.LAYOUT_TYPE.FRAME,
         className: 'dashboard',
       },
     },

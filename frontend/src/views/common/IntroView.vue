@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="image-cont">
-            <img src="../assets/img/app-icon.png" />
+            <img src="../../assets/img/app-icon.png" />
         </div>
         <p>따뜻한 겨울</p>
     </div>

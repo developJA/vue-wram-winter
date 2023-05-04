@@ -1,11 +1,12 @@
 <template>
   <div>
-    <router-view class="scroll-wrap"></router-view>
+    <router-view class="container"></router-view>
   </div>
 </template>
 
 <script>
+
 export default {
-  name: "EmptyLayout"
+  name: "EmptyLayout",
 };
 </script>

@@ -7,12 +7,14 @@
 <script>
 import DefaultLayout from "./DefaultLayout";
 import EmptyLayout from "./EmptyLayout";
+import FrameLayout from "./FrameLayout";
 
 export default {
   name: "TheLayout",
   components: {
     DefaultLayout,
-    EmptyLayout
+    EmptyLayout,
+    FrameLayout
   },
   props: {
     scrollTop : {

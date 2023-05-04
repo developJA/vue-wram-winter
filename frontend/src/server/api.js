@@ -20,6 +20,9 @@ function loginApi(sendData, _callback){
 
         _callback(result);
     })
+    .catch((err) => {
+        console.log("error >>>> ",err);
+    })
 }
 
 function signUpApi(sendData, _callback){
@@ -71,7 +74,7 @@ function myBookmarksApi(sendData, _callback) {
         _callback(result);
     })
     .catch((err) => {
-        console.log("errr   >>> ",err);
+        console.log("err   >>> ",err);
         
     })
 }

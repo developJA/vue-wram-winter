@@ -19,6 +19,9 @@ export default {
     TheLayout,
     CommonPopup,
     IndicatorLayout,
+  },
+  mounted() {
+    this.Common.resizeContents();
   }
 };
 </script>

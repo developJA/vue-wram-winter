@@ -20,6 +20,10 @@ axios.interceptors.response.use(
   res => {
     EventBus.$emit('showIndicator', false);
     return res;
+  },
+  error => {
+    EventBus.$emit('showIndicator', false);
+    EventBus.$popAlert(error.message);
   }
 )
 
