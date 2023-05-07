@@ -12,6 +12,7 @@ import MyView from '../views/my/MyView.vue';
 import DonationDetailView from '../views/donation/DonationDetailView.vue';
 import VolunteerDetailView from '../views/volunteer/VolunteerDetailView.vue';
 import BookmarksView from '../views/my/BookmarksView.vue';
+import DonationHist from '../views/my/DonationHistView.vue';
 
 // lazyload 적용
 // () => import(/* webpackChunkName: "intro" */'views/intro');
@@ -111,6 +112,15 @@ const router = new Router({
       path: '/my/bookmarks',
       name: 'bookmarks',
       component: BookmarksView,
+      meta: {
+        layout: Define.LAYOUT_TYPE.FRAME,
+        className: 'dashboard',
+      },
+    },
+    {
+      path: '/my/donationHist',
+      name: 'donationHist',
+      component: DonationHist,
       meta: {
         layout: Define.LAYOUT_TYPE.FRAME,
         className: 'dashboard',

@@ -41,7 +41,7 @@
                             <span>봉사 기록</span>
                             <button class="btn-next"></button>
                         </li>
-                        <li @click="moveNextPage('bookmarks')">
+                        <li @click="moveNextPage('donationHist')">
                             <span>기부 기록</span>
                             <button class="btn-next"></button>
                         </li>

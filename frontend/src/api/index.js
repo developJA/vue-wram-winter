@@ -107,6 +107,21 @@ function deleteBookmarks(sendObj) {
   return axios.delete(`${config.fakeServer}/bookmarks/${sendObj.id}`);
 }
 
+// 기부목록 가져오기
+function getDonatinonHistory() {
+  return axios.get(`${config.fakeServer}/donationHist`);
+}
+
+// 기부목록 업데이트
+function updateDonationHistory(sendObj) {
+  return axios.put(`${config.fakeServer}/donationHist`, sendObj);
+}
+
+// 기부목록 추가하기
+function postDonationHistory(sendObj) {
+  return axios.post(`${config.fakeServer}/donationHist`, sendObj);
+}
+
 export {
   getAreaCodeInquiryList,
   getCntrCategoryGrpList,
@@ -120,4 +135,7 @@ export {
   getBookmarks,
   postBookmarks,
   deleteBookmarks,
+  getDonatinonHistory,
+  updateDonationHistory,
+  postDonationHistory,
 };

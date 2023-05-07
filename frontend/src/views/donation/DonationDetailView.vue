@@ -37,7 +37,7 @@
                     <p class="right-quote">"</p>
                 </div>
                 <div class="bottom-box pdtb15">
-                  <button id="btnDonate" class="btn-txt">5,000원 기부하기</button>
+                  <button id="btnDonate" class="btn-txt" @click="doDonate">5,000원 기부하기</button>
                 </div>
                 <div class="border-box">
                     <div>
@@ -84,7 +84,7 @@
 <script>
 import 'setimmediate';
 import { getCntrGrpProgramList } from '../../api/index.js';
-import { regBookmarksApi, delBookmarksApi, checkMyBookmarkApi } from '../../server/api.js';
+import { regBookmarksApi, delBookmarksApi, checkMyBookmarkApi, donateApi } from '../../server/api.js';
 
 export default {
   data() {
@@ -227,6 +227,22 @@ export default {
           _this.$popAlert('즐겨찾기에서 제거되었습니다.');
           document.getElementsByClassName('bookmark')[0].classList.remove('on');
           _this.bookmarkId = '';
+        }
+      });
+    },
+    // 기부하기
+    doDonate() {
+      const _this = this;
+      const param = {
+        user_id: _this.getGlobal('USER_INFO').id,
+        title: this.donationInfo.reprsntSj,
+        groupNm: this.donationInfo.rcritrNm,
+        item_id: this.donationInfo.rcritrId,
+        amount: 5000,
+      };
+      donateApi(param, function (rd) {
+        if (rd.status === 'SUCCESS') {
+          console.log(rd);
         }
       });
     },

@@ -52,6 +52,7 @@ export default {
     const autoLoginYn = this.getStorage('AUTO_LOGIN_YN');
     if (autoLoginYn === 'Y') {
       document.getElementById('autoLoginCheck').checked = true;
+      document.getElementById('inpId').value = this.getStorage('USER_ID');
     } else {
       document.getElementById('autoLoginCheck').checked = false;
     }
@@ -82,6 +83,7 @@ export default {
           // 자동로그인 여부 저장
           const autoLoginYn = document.getElementById('autoLoginCheck').checked;
           _this.setStorage('AUTO_LOGIN_YN', autoLoginYn ? 'Y' : 'N');
+          _this.setStorage('USER_ID', idVal);
 
           // 사용자 정보 저장
           const userInfo = rd.data;

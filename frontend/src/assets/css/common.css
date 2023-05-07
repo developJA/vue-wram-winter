@@ -81,6 +81,9 @@ body > div{
 .blue {
     color : #39a6ee;
 }
+.black {
+    color : #000;
+}
 .btn-back{
     background-image: url('../../assets/img/btn-prev.png');
     background-size: 60px;

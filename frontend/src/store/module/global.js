@@ -32,7 +32,6 @@ export const mutations = {
 
 export const getters = {
   USER_INFO: (st) => st['USER_INFO'],
-  AUTO_LOGIN_YN: (st) => st['AUTO_LOGIN_YN'],
 };
 
 export default {

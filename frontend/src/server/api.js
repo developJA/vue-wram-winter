@@ -137,7 +137,79 @@ function delBookmarksApi(sendData, _callback) {
       _callback(result);
     })
     .catch((err) => {
-      console.log('errr   >>> ', err);
+      console.log('err   >>> ', err);
+    });
+}
+
+function getDonateHistApi(sendData, _callback) {
+  let result = {};
+
+  api.getDonatinonHistory()
+    .then((res) => {
+      const { data } = res;
+      const myList = data.filter((x) => x.user_id === sendData.user_id);
+      result = {
+        status: 'SUCCESS',
+        data: {
+          histories: myList || [],
+        },
+      };
+
+      _callback(result);
+    })
+    .catch((err) => {
+      console.log('err   >>> ', err);
+    });
+}
+
+function donateApi(sendData, _callback) {
+  let result = {};
+
+  // 로그인 여부 체크
+  if (sendData.user_id === undefined) {
+    EventBus.$popAlert('다시 로그인 해주세요.');
+    return false;
+  }
+  // 중복체크...
+  api.getDonatinonHistory()
+    .then((res) => {
+      const { data } = res;
+      const oldItem = data.find((x) => x.user_id === sendData.user_id && x.item_id === sendData.item_id);
+
+      if (oldItem !== undefined) { // 이미 기부이력이 있는 활동일 경우
+        sendData.amount += Number(oldItem.amount);
+
+        api.updateDonationHistory(sendData)
+          .then((resPost) => {
+            result = {
+              status: 'SUCCESS',
+              data: {
+                histories: resPost.data,
+              },
+            };
+            _callback(result);
+          })
+          .catch((err) => {
+            console.log('errr   >>> ', err);
+          });
+      } else { // 기부이력이 없는 활동일 경우
+        api.postDonationHistory(sendData)
+          .then((resPost) => {
+            result = {
+              status: 'SUCCESS',
+              data: {
+                histories: resPost.data,
+              },
+            };
+            _callback(result);
+          })
+          .catch((err) => {
+            console.log('errr   >>> ', err);
+          });
+      }
+    })
+    .catch((err) => {
+      console.log('err   >>> ', err);
     });
 }
 
@@ -148,4 +220,6 @@ export {
   getBookmarkListApi,
   delBookmarksApi,
   checkMyBookmarkApi,
+  getDonateHistApi,
+  donateApi,
 };
