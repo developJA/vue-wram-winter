@@ -20,6 +20,9 @@
                     <div class="pdtb15">실제로 에르도안 대통령은 이슬람주의와 민족주의를 앞세워 적극적인 주권 행사를 하고 있다. 2020년 7월 유네스코 유산인 아야 소피아 박물관을 이슬람 사원인 모스크로 전환하는 법령을 발표한 것도 이와 같은 맥락에서다. 과거 튀르키예 공화국을 설립한 아타튀르크 전 대통령이 이슬람식의 술탄제를 폐지하고 서구화를 꾀한 것과는 반대되는 행보다. </div>
                     <p class="right-quote">"</p>
                 </div>
+                <div class="bottom-box pdtb15">
+                  <button id="btnDonate" class="btn-txt">5,000원 기부하기</button>
+                </div>
             </div>
         </div>
     </div>

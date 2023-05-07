@@ -36,6 +36,9 @@
                     <div class="pdtb15">{{ donationInfo.rcritSj }}</div>
                     <p class="right-quote">"</p>
                 </div>
+                <div class="bottom-box pdtb15">
+                  <button id="btnDonate" class="btn-txt">5,000원 기부하기</button>
+                </div>
                 <div class="border-box">
                     <div>
                         <span class="title">{{ donationInfo.rcritrNm }}</span>

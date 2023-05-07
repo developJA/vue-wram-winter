@@ -6,6 +6,9 @@
                     <img src="" alt="">
                 </div>
                 <div class="thumb-info">
+                    <button class="logout" @click="logout">
+                        <span>로그아웃</span>
+                    </button>
                     <span class="sticker">Lv.1</span>
                     <p id="pUserNm" class="nick"><!--신정아--></p>
                     <p id="pUserId" class="id"><!--jas1226--></p>
@@ -66,6 +69,17 @@ export default {
     moveNextPage(pageNm) {
       this.$router.push(`my/${pageNm}`);
     },
+    // 로그아웃
+    logout() {
+      this.$popConfirm({
+        text: '로그아웃 하시겠습니까?',
+      }).then((flag) => {
+        if (flag === true) { // 확인
+          this.setGlobal('USER_INFO', {});
+          this.$router.replace({ path: '/login' });
+        }
+      });
+    },
   },
 };
 </script>
@@ -108,6 +122,18 @@ export default {
 }
 .thumb-info .id{
     font-size: 0.9rem;
+}
+.thumb-info .logout{
+    position: absolute;
+    right: 0.5rem;
+    border: 0;
+    background: transparent;
+}
+.thumb-info .logout > span{
+    color: #2525ff;
+    border-bottom: 1px solid #2525ff;
+    font-size: 0.9rem;
+    padding: 0.1rem;
 }
 .level-wrap {
     background-color: #ff568b68;

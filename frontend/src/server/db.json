@@ -30,6 +30,42 @@
       "endDt": 20211231,
       "item_id": 225,
       "id": 1
+    },
+    {
+      "user_id": "jas1226",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "시민들이 함께 참여하는  수도권매립지 드림파크 야생화단지 공원조성",
+      "groupNm": "(재)드림파크문화재단",
+      "startDt": 20210906,
+      "endDt": 20220905,
+      "item_id": 489,
+      "id": 2
+    },
+    {
+      "user_id": "jas1226",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "동물복지 향상을 위한 모집 ",
+      "groupNm": "캣치독팀",
+      "startDt": 20201031,
+      "endDt": 20211030,
+      "item_id": 301,
+      "id": 3
     }
+  ],
+  DNTN_HIS : [
+    {
+      "user_id" : "user1",
+      "title": "동물복지 향상을 위한 모집",
+      "groupNm": "캣치독팀",
+      "item_id": 301,
+      "amount" : "5,000",
+      "id": 3
+    }
+  ],
+  VLNT_HIS : [
+
   ]
+
 }

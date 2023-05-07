@@ -197,7 +197,8 @@ export default {
     color: #333333;
     text-align: center;
     border-radius: 0.3rem;
-    width: 5.3rem;
+    /* width: 5.3rem; */
+    width : 90%;
     height: 3rem;
     min-height: 2.2rem;
     padding: 1rem 0.5rem;
