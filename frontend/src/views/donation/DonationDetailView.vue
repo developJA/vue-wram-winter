@@ -81,7 +81,7 @@
 <script>
 import 'setimmediate';
 import { getCntrGrpProgramList } from '../../api/index.js';
-import { regBookmarksApi, delBookmarksApi } from '../../server/api.js';
+import { regBookmarksApi, delBookmarksApi, checkMyBookmarkApi } from '../../server/api.js';
 
 export default {
   data() {
@@ -101,10 +101,21 @@ export default {
     this.searchGoogleImage();
   },
   mounted() {
-    // 푸터 버튼 활성화 => 기부
-    this.EventBus.$emit('activeFooter', { url: 'donation' });
+    const _this = this;
 
     // 즐겨찾기 저장여부 확인
+    const param = {
+      user_id: _this.getGlobal('USER_INFO').id,
+      type: 'donation',
+      item_id: _this.donationInfo.rcritrId,
+    };
+    checkMyBookmarkApi(param, function (rd) {
+      console.log(rd);
+      if (rd.data.bookmarks !== undefined) { // 즐겨찾기 추가된 항목인 경우
+        _this.bookmarkId = rd.data.bookmarks.id;
+        document.getElementsByClassName('bookmark')[0].classList.add('on');
+      }
+    });
   },
   methods: {
     // 기부단체 이미지
@@ -194,8 +205,11 @@ export default {
         item_id: this.donationInfo.rcritrId,
       };
       regBookmarksApi(param, function (rd) {
-        _this.$popAlert('즐겨찾기에 추가되었습니다.');
-        document.getElementsByClassName('bookmark')[0].classList.add('on');
+        if (rd.status === 'SUCCESS') {
+          _this.$popAlert('즐겨찾기에 추가되었습니다.');
+          document.getElementsByClassName('bookmark')[0].classList.add('on');
+          _this.bookmarkId = rd.data.bookmarks.id;
+        }
       });
     },
     // 즐겨찾기 삭제
@@ -203,12 +217,14 @@ export default {
       const _this = this;
       const param = {
         user_id: _this.getGlobal('USER_INFO').id,
-        type: 'donation',
-        item_id: this.donationInfo.rcritrId,
+        id: _this.bookmarkId,
       };
       delBookmarksApi(param, function (rd) {
-        _this.$popAlert('즐겨찾기에서 제거되었습니다.');
-        document.getElementsByClassName('bookmark')[0].classList.remove('on');
+        if (rd.status === 'SUCCESS') {
+          _this.$popAlert('즐겨찾기에서 제거되었습니다.');
+          document.getElementsByClassName('bookmark')[0].classList.remove('on');
+          _this.bookmarkId = '';
+        }
       });
     },
   },

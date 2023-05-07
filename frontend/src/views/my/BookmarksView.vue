@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { myBookmarksApi } from '../../server/api.js';
+import { getBookmarkListApi } from '../../server/api.js';
 
 export default {
   data() {
@@ -41,7 +41,7 @@ export default {
       const param = {
         user_id: _this.getGlobal('USER_INFO').id,
       };
-      myBookmarksApi(param, function (rd) {
+      getBookmarkListApi(param, function (rd) {
         _this.likeList = rd.data.bookmarks;
 
         if (_this.likeList.length > 0) {

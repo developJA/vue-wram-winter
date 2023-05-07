@@ -103,9 +103,8 @@ function postBookmarks(sendObj) {
 }
 
 // 즐겨찾기 삭제하기
-function deleteBookmarks(id) {
-  console.log('deleteBookmarks id   >> ', id);
-  return axios.delete(`${config.fakeServer}/bookmarks/${id}`);
+function deleteBookmarks(sendObj) {
+  return axios.delete(`${config.fakeServer}/bookmarks/${sendObj.id}`);
 }
 
 export {

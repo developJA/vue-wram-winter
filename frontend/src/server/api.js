@@ -51,7 +51,12 @@ function regBookmarksApi(sendData, _callback) {
   api.postBookmarks(sendData)
     .then((res) => {
       console.log('postBookmarks res >>>>> ', res);
-      result = { status: 'SUCCESS' };
+      result = {
+        status: 'SUCCESS',
+        data: {
+          bookmarks: res.data,
+        },
+      };
 
       _callback(result);
     })
@@ -60,7 +65,7 @@ function regBookmarksApi(sendData, _callback) {
     });
 }
 
-function myBookmarksApi(sendData, _callback) {
+function getBookmarkListApi(sendData, _callback) {
   let result = {};
 
   api.getBookmarks()
@@ -82,6 +87,37 @@ function myBookmarksApi(sendData, _callback) {
     });
 }
 
+function checkMyBookmarkApi(sendData, _callback) {
+  let result = {};
+
+  // 파라미터 체크
+  if (sendData.user_id === undefined) {
+    EventBus.$popAlert('다시 로그인 해주세요.');
+    return false;
+  } if (sendData.item_id === undefined || sendData.type === undefined) {
+    EventBus.$popAlert('필수파라미터 누락');
+    return false;
+  }
+
+  api.getBookmarks()
+    .then((res) => {
+      console.log('getBookmarks res >>>>> ', res);
+      const { data } = res;
+      const obj = data.find((x) => x.user_id === sendData.user_id && x.type === sendData.type && x.item_id === sendData.item_id);
+      result = {
+        status: 'SUCCESS',
+        data: {
+          bookmarks: obj,
+        },
+      };
+
+      _callback(result);
+    })
+    .catch((err) => {
+      console.log('err   >>> ', err);
+    });
+}
+
 function delBookmarksApi(sendData, _callback) {
   let result = {};
 
@@ -92,9 +128,7 @@ function delBookmarksApi(sendData, _callback) {
   }
 
   // 중복체크.....
-
   delete sendData.user_id;
-  delete sendData.type;
 
   api.deleteBookmarks(sendData)
     .then((res) => {
@@ -111,6 +145,7 @@ export {
   loginApi,
   signUpApi,
   regBookmarksApi,
-  myBookmarksApi,
+  getBookmarkListApi,
   delBookmarksApi,
+  checkMyBookmarkApi,
 };
