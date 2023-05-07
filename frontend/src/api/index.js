@@ -6,26 +6,26 @@ const config = {
   baseUrl: '/openapi/service/rest',
   key: 'czDub2E2d3LEXxD6Oc%2FG9Pzpc1IF9B7WiEUeghL9oSO0V7bFP8PRYBODUdoVNG2knFQcdXqJpG8HwPXi%2BuCxSw%3D%3D',
   lang: 'ko-KR',
-  fakeServer : 'http://localhost:3000',
+  fakeServer: 'http://localhost:3000',
 };
 
 axios.interceptors.request.use(
-  config => {
+  (config) => {
     EventBus.$emit('showIndicator', true);
     return config;
-  }
+  },
 );
 
 axios.interceptors.response.use(
-  res => {
+  (res) => {
     EventBus.$emit('showIndicator', false);
     return res;
   },
-  error => {
+  (error) => {
     EventBus.$emit('showIndicator', false);
     EventBus.$popAlert(error.message);
-  }
-)
+  },
+);
 
 // 2. API 함수들을 정리
 // 지역코드조회
@@ -82,24 +82,30 @@ function getVolunteerDetail(sendObj) {
 }
 
 // 구글 이미지 검색 API
-function searchGoogleImage(queryStr){
+function searchGoogleImage(queryStr) {
   return axios.get(`https://www.googleapis.com/customsearch/v1?key=AIzaSyBo4Y4LqHnTqz7XqJPI13kcVQMt-GhuR6A&cx=1392865ebcc984797&q=${queryStr}`);
 }
 
 /* 로컬 DB */
 // 로그인
-function getUser(){
+function getUser() {
   return axios.get(`${config.fakeServer}/user`);
 }
 
 // 즐겨찾기 가져오기
-function getBookmarks(){
+function getBookmarks() {
   return axios.get(`${config.fakeServer}/bookmarks`);
 }
 
 // 즐겨찾기 추가하기
-function postBookmarks(sendObj){
+function postBookmarks(sendObj) {
   return axios.post(`${config.fakeServer}/bookmarks`, sendObj);
+}
+
+// 즐겨찾기 삭제하기
+function deleteBookmarks(id) {
+  console.log('deleteBookmarks id   >> ', id);
+  return axios.delete(`${config.fakeServer}/bookmarks/${id}`);
 }
 
 export {
@@ -114,4 +120,5 @@ export {
   getUser,
   getBookmarks,
   postBookmarks,
+  deleteBookmarks,
 };

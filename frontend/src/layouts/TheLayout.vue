@@ -5,20 +5,20 @@
 </template>
 
 <script>
-import DefaultLayout from "./DefaultLayout";
-import EmptyLayout from "./EmptyLayout";
-import FrameLayout from "./FrameLayout";
+import DefaultLayout from './DefaultLayout';
+import EmptyLayout from './EmptyLayout';
+import FrameLayout from './FrameLayout';
 
 export default {
-  name: "TheLayout",
+  name: 'TheLayout',
   components: {
     DefaultLayout,
     EmptyLayout,
-    FrameLayout
+    FrameLayout,
   },
   props: {
-    scrollTop : {
-      type: Number
+    scrollTop: {
+      type: Number,
     },
   },
 };

@@ -27,35 +27,35 @@
 import { myBookmarksApi } from '../../server/api.js';
 
 export default {
-    data() {
-        return {
-            likeList : [],
-        }
-    },
-    created () {
-        this.getLikeList();
-    },
-    methods : {
-        getLikeList() {
-            const _this = this;
-            const param = {
-                user_id : "user1",
-            }
-            myBookmarksApi(param, function(rd){
-                _this.likeList = rd.data.bookmarks;
+  data() {
+    return {
+      likeList: [],
+    };
+  },
+  created() {
+    this.getLikeList();
+  },
+  methods: {
+    getLikeList() {
+      const _this = this;
+      const param = {
+        user_id: _this.getGlobal('USER_INFO').id,
+      };
+      myBookmarksApi(param, function (rd) {
+        _this.likeList = rd.data.bookmarks;
 
-                if(_this.likeList.length > 0){
-                    document.querySelector('.nodata-wrap').classList.add("none");
-                }else{
-                    document.querySelector('.nodata-wrap').classList.remove("none");
-                }
-            });
-        },
-        moveDetail(obj) {
-            console.log(obj);
+        if (_this.likeList.length > 0) {
+          document.querySelector('.nodata-wrap').classList.add('none');
+        } else {
+          document.querySelector('.nodata-wrap').classList.remove('none');
         }
-    }
-}
+      });
+    },
+    moveDetail(obj) {
+      console.log(obj);
+    },
+  },
+};
 </script>
 
 <style scoped>

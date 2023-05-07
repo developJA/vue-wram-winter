@@ -7,8 +7,8 @@
                 </div>
                 <div class="thumb-info">
                     <span class="sticker">Lv.1</span>
-                    <p class="nick">신정아</p>
-                    <p class="id">jas1226</p>
+                    <p id="pUserNm" class="nick"><!--신정아--></p>
+                    <p id="pUserId" class="id"><!--jas1226--></p>
                 </div>
             </div>
             <div class="cont-wrap">
@@ -17,7 +17,7 @@
                         <span>Lv.1</span>
                         <img src="../../assets/img/icon-plant.png">
                     </div>
-                    
+
                     <div class="progress-bar">
                         <div class="bar" id="progress-bar" style="width:70%" value="70">
                             <span class="a11y-blind">3회</span>
@@ -26,11 +26,7 @@
                 </div>
                 <div class="list-wrap">
                     <ul>
-                        <li @click="moveNextPage('bookmarks')">
-                            <span>활동뱃지 5개</span>
-                            <button class="btn-next"></button>
-                        </li>
-                        <li @click="moveNextPage('bookmarks')">
+                        <li>
                             <span>봉사 참여 확인</span>
                             <button class="btn-next"></button>
                         </li>
@@ -46,22 +42,32 @@
                             <span>기부 기록</span>
                             <button class="btn-next"></button>
                         </li>
+                        <li class="none" @click="moveNextPage('bookmarks')">
+                            <span>공지사항 등록</span>
+                            <button class="btn-next"></button>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
-        
+
     </div>
 </template>
 
 <script>
 export default {
-    methods : {
-        moveNextPage(pageNm) {
-            this.$router.push('my/'+pageNm);
-        }
-    }
-}
+  mounted() {
+    const userInfo = this.getGlobal('USER_INFO');
+    console.log('userInfo    ', userInfo);
+    document.getElementById('pUserNm').innerHTML = userInfo.name;
+    document.getElementById('pUserId').innerHTML = userInfo.id;
+  },
+  methods: {
+    moveNextPage(pageNm) {
+      this.$router.push(`my/${pageNm}`);
+    },
+  },
+};
 </script>
 
 <style scoped>

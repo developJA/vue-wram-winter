@@ -4,6 +4,7 @@ import Define from '@/common/define';
 
 import IntroView from '../views/common/IntroView.vue';
 import LoginView from '../views/common/LoginView.vue';
+import SignupView from '../views/common/SignupView.vue';
 import HomeView from '../views/home/HomeView.vue';
 import VolunteerView from '../views/volunteer/VolunteerView.vue';
 import DonationView from '../views/donation/DonationView.vue';
@@ -38,6 +39,15 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: LoginView,
+      meta: {
+        layout: Define.LAYOUT_TYPE.EMPTY,
+        className: 'dashboard',
+      },
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignupView,
       meta: {
         layout: Define.LAYOUT_TYPE.EMPTY,
         className: 'dashboard',

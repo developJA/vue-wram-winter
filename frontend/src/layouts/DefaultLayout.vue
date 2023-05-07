@@ -11,12 +11,12 @@ import Header from '../components/layout/Header.vue';
 import TabFooter from '../components/layout/TabFooter.vue';
 
 export default {
-  name: "DefaultLayout",
-  components: { 
+  name: 'DefaultLayout',
+  components: {
     Header,
     TabFooter,
   },
-  methods : {
-  }
+  methods: {
+  },
 };
 </script>

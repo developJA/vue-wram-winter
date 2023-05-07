@@ -25,13 +25,18 @@
                     <div class="t-align">
                         <div class="left">
                             <span class="chk-box">
-                                <input type="checkbox" id="labelCheck1" name="labelCheck">
-                                <label for="labelCheck1">아이디 저장</label>
+                                <input type="checkbox" id="autoLoginCheck" name="labelCheck">
+                                <label for="autoLoginCheck">아이디 저장</label>
                             </span>
                         </div>
                     </div>
                     <div class="btn-box">
                         <button type="button" class="btn-txt dft" @click="submit">로그인</button>
+                    </div>
+                    <div class="mrtb10 none">
+                        <button class="">
+                            회원이 아니신가요?
+                        </button>
                     </div>
                 </div>
             </div>
@@ -40,40 +45,56 @@
 </template>
 
 <script>
-import { loginApi } from '../../server/api.js'
+import { loginApi } from '../../server/api.js';
 
 export default {
-    methods : {
-        moveMain(){
-            this.$router.replace({ path: '/home' })
-        },
-        submit() {
-            const _this = this;
-            const idVal = document.getElementById("inpId").value;
-            const pwVal = document.getElementById("inpPw").value;
-
-            if(idVal.length < 1){
-                _this.$popAlert("아이디를 입력하세요.");
-                return false;
-            }
-            if(pwVal.length < 1){
-                _this.$popAlert("비밀번호를 입력하세요.");
-                return false;
-            }
-            const param = {
-                id : idVal,
-                pw : pwVal,
-            }
-            loginApi(param, function(rd){
-                if(rd.status == "SUCCESS"){
-                    _this.moveMain();
-                }else{
-                    _this.$popAlert("로그인에 실패하였습니다.");
-                }
-            });
-        }
+  mounted() {
+    const autoLoginYn = this.getStorage('AUTO_LOGIN_YN');
+    if (autoLoginYn === 'Y') {
+      document.getElementById('autoLoginCheck').checked = true;
+    } else {
+      document.getElementById('autoLoginCheck').checked = false;
     }
-}
+  },
+  methods: {
+    moveMain() {
+      this.$router.replace({ path: '/home' });
+    },
+    submit() {
+      const _this = this;
+      const idVal = document.getElementById('inpId').value;
+      const pwVal = document.getElementById('inpPw').value;
+
+      if (idVal.length < 1) {
+        _this.$popAlert('아이디를 입력하세요.');
+        return false;
+      }
+      if (pwVal.length < 1) {
+        _this.$popAlert('비밀번호를 입력하세요.');
+        return false;
+      }
+      const param = {
+        id: idVal,
+        pw: pwVal,
+      };
+      loginApi(param, function (rd) {
+        if (rd.status === 'SUCCESS') {
+          // 자동로그인 여부 저장
+          const autoLoginYn = document.getElementById('autoLoginCheck').checked;
+          _this.setStorage('AUTO_LOGIN_YN', autoLoginYn ? 'Y' : 'N');
+
+          // 사용자 정보 저장
+          const userInfo = rd.data;
+          _this.setGlobal('USER_INFO', userInfo);
+
+          _this.moveMain();
+        } else {
+          _this.$popAlert('로그인에 실패하였습니다.');
+        }
+      });
+    },
+  },
+};
 </script>
 
 <style>

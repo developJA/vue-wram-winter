@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <TheLayout>
+    <the-layout>
       <router-view />
-    </TheLayout>
+    </the-layout>
     <common-popup></common-popup>
     <indicator-layout></indicator-layout>
   </div>
 </template>
 
 <script>
-import CommonPopup from "./components/layout/CommonPopup.vue"
+import TheLayout from './layouts/TheLayout.vue';
+import CommonPopup from './components/layout/CommonPopup.vue';
 import IndicatorLayout from './layouts/IndicatorLayout.vue';
-import TheLayout from "./layouts/TheLayout";
 
 export default {
   name: 'App',
@@ -22,7 +22,7 @@ export default {
   },
   mounted() {
     this.Common.resizeContents();
-  }
+  },
 };
 </script>
 

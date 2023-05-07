@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="content">
-          
+
             <div id="divCateWrap" class="category-wrap">
                 <swiper class="swiper mrg10" :options="swiperOption">
                     <swiper-slide v-for="cateItem in categories" v-bind:key="cateItem.item" ref="VuePerson">

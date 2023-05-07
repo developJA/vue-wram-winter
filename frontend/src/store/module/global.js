@@ -1,7 +1,7 @@
-import _ from "lodash";
-export const allClear = 'allClear';
+import _ from 'lodash';
 import { getCntrGrpProgramList } from '../../api/index.js';
 
+export const allClear = 'allClear';
 
 export const state = () => ({
   USER_INFO: {},
@@ -10,20 +10,18 @@ export const state = () => ({
 
 export const actions = {
   FETCH_DONATION_LIST({ commit }) {
-    getCntrGrpProgramList() 
-    .then(({ data, status }) => {
-      console.log(status);
-      commit('SET_DONATION_LIST', data);
-    })
-    .catch(function(error){
-      console.log(error);
-    })
+    getCntrGrpProgramList()
+      .then(({ data, status }) => {
+        console.log(status);
+        commit('SET_DONATION_LIST', data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   },
 };
 
 export const mutations = {
-  [allClear](state,payload){
-  },
   USER_INFO(state, payload) {
     state['USER_INFO'] = payload;
   },
@@ -33,9 +31,8 @@ export const mutations = {
 };
 
 export const getters = {
-  USER_INFO: (st) => {
-    return st['USER_INFO'];
-  },
+  USER_INFO: (st) => st['USER_INFO'],
+  AUTO_LOGIN_YN: (st) => st['AUTO_LOGIN_YN'],
 };
 
 export default {

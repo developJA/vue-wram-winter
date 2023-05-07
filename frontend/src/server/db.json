@@ -2,14 +2,187 @@
   "user": [
     {
       "id": "master",
-      "pw": "987654321"
+      "pw": "987654321",
+      "name": "마스터",
+      "email": "devt3211@gmail.com"
+    },
+    {
+      "id": "jas1226",
+      "pw": "1234",
+      "name": "신정아",
+      "email": "test@gmail.com"
     },
     {
       "id": "user1",
-      "pw": "1234"
+      "pw": "1234",
+      "name": "유저1",
+      "email": "user1@gmail.com"
     }
   ],
   "bookmarks": [
-    
+    {
+      "user_id": "master",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "인천 지역 코로나19 위기 극복을 위한 긴급 지원",
+      "groupNm": "사단법인 인천시민재단",
+      "startDt": 20210906,
+      "endDt": 20211231,
+      "item_id": 317,
+      "id": 1
+    },
+    {
+      "user_id": "master",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "인천 지역 코로나19 위기 극복을 위한 긴급 지원",
+      "groupNm": "사단법인 인천시민재단",
+      "startDt": 20210906,
+      "endDt": 20211231,
+      "item_id": 317,
+      "id": 2
+    },
+    {
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "'튀르키예,시리아 지진피해' 긴급구호지원",
+      "groupNm": "사회복지법인 광명시사회복지협의회",
+      "startDt": 20230215,
+      "endDt": 20230331,
+      "item_id": 278,
+      "id": 3
+    },
+    {
+      "user_id": "jas1226",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "'튀르키예,시리아 지진피해' 긴급구호지원",
+      "groupNm": "사회복지법인 광명시사회복지협의회",
+      "startDt": 20230215,
+      "endDt": 20230331,
+      "item_id": 278,
+      "id": 4
+    },
+    {
+      "user_id": "jas1226",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "'튀르키예,시리아 지진피해' 긴급구호지원",
+      "groupNm": "사회복지법인 광명시사회복지협의회",
+      "startDt": 20230215,
+      "endDt": 20230331,
+      "item_id": 278,
+      "id": 5
+    },
+    {
+      "user_id": "jas1226",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "'튀르키예,시리아 지진피해' 긴급구호지원",
+      "groupNm": "사회복지법인 광명시사회복지협의회",
+      "startDt": 20230215,
+      "endDt": 20230331,
+      "item_id": 278,
+      "id": 6
+    },
+    {
+      "user_id": "jas1226",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "인천 지역 코로나19 위기 극복을 위한 긴급 지원",
+      "groupNm": "사단법인 인천시민재단",
+      "startDt": 20210906,
+      "endDt": 20211231,
+      "item_id": 317,
+      "id": 7
+    },
+    {
+      "user_id": "jas1226",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "'튀르키예,시리아 지진피해' 긴급구호지원",
+      "groupNm": "사회복지법인 광명시사회복지협의회",
+      "startDt": 20230215,
+      "endDt": 20230331,
+      "item_id": 278,
+      "id": 8
+    },
+    {
+      "user_id": "jas1226",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "'튀르키예,시리아 지진피해' 긴급구호지원",
+      "groupNm": "사회복지법인 광명시사회복지협의회",
+      "startDt": 20230215,
+      "endDt": 20230331,
+      "item_id": 278,
+      "id": 9
+    },
+    {
+      "user_id": "jas1226",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "취약계층 지원 및 사회적 재난구호를 위한 재원 마련",
+      "groupNm": "대한적십자사 경기도지사",
+      "startDt": 20200824,
+      "endDt": 20210823,
+      "item_id": 293,
+      "id": 10
+    },
+    {
+      "user_id": "master",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "국내 취약소외계층 물품지원사업",
+      "groupNm": "사단법인 수와진의 사랑더하기",
+      "startDt": 20220901,
+      "endDt": 20221223,
+      "item_id": 686,
+      "id": 11
+    },
+    {
+      "user_id": "master",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "국내 취약소외계층 물품지원사업",
+      "groupNm": "사단법인 수와진의 사랑더하기",
+      "startDt": 20220901,
+      "endDt": 20221223,
+      "item_id": 686,
+      "id": 12
+    },
+    {
+      "user_id": "jas1226",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "인천 지역 코로나19 위기 극복을 위한 긴급 지원",
+      "groupNm": "사단법인 인천시민재단",
+      "startDt": 20210906,
+      "endDt": 20211231,
+      "item_id": 317,
+      "id": 13
+    },
+    {
+      "user_id": "jas1226",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "인천 지역 코로나19 위기 극복을 위한 긴급 지원",
+      "groupNm": "사단법인 인천시민재단",
+      "startDt": 20210906,
+      "endDt": 20211231,
+      "item_id": 317,
+      "id": 14
+    },
+    {
+      "user_id": "jas1226",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "시리아-튀르키예 대지진 특별모금",
+      "groupNm": "(사)광주국제교류센터",
+      "startDt": 20230208,
+      "endDt": 20230228,
+      "item_id": 780,
+      "id": 15
+    }
   ]
 }
