@@ -178,8 +178,9 @@ function donateApi(sendData, _callback) {
 
       if (oldItem !== undefined) { // 이미 기부이력이 있는 활동일 경우
         sendData.amount += Number(oldItem.amount);
+        sendData.id = oldItem.id;
 
-        api.updateDonationHistory(sendData)
+        api.putDonationHistory(sendData)
           .then((resPost) => {
             result = {
               status: 'SUCCESS',

@@ -1,5 +1,6 @@
 <template>
     <div>
+      <div class="content">
         <div class="scroll-wrap">
             <div id="divTitleImg" class="banner-img-cont">
                 <div class="bookmark" @click="saveBookmarks">
@@ -77,6 +78,7 @@
                 </div>
             </div>
         </div>
+      </div>
     </div>
 
 </template>
@@ -242,7 +244,7 @@ export default {
       };
       donateApi(param, function (rd) {
         if (rd.status === 'SUCCESS') {
-          console.log(rd);
+          _this.$popAlert('성공적으로 기부를 완료하였습니다.<br/>기부는 여러번 할 수 있습니다.');
         }
       });
     },

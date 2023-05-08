@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="default">
     <Header></Header>
     <router-view class="container"></router-view>
     <tab-footer></tab-footer>

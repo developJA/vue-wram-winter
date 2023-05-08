@@ -13,6 +13,7 @@ import DonationDetailView from '../views/donation/DonationDetailView.vue';
 import VolunteerDetailView from '../views/volunteer/VolunteerDetailView.vue';
 import BookmarksView from '../views/my/BookmarksView.vue';
 import DonationHist from '../views/my/DonationHistView.vue';
+import Notice from '../views/my/NoticeView.vue';
 
 // lazyload 적용
 // () => import(/* webpackChunkName: "intro" */'views/intro');
@@ -121,6 +122,15 @@ const router = new Router({
       path: '/my/donationHist',
       name: 'donationHist',
       component: DonationHist,
+      meta: {
+        layout: Define.LAYOUT_TYPE.FRAME,
+        className: 'dashboard',
+      },
+    },
+    {
+      path: '/my/notice',
+      name: 'notice',
+      component: Notice,
       meta: {
         layout: Define.LAYOUT_TYPE.FRAME,
         className: 'dashboard',

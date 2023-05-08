@@ -5,8 +5,8 @@ export default class Common {
         const footerHeight = document.querySelector("footer") ? document.querySelector("footer").offsetHeight : 0;
         const layoutHei = window.outerHeight - (headerHeight + footerHeight);
     
-        document.querySelector('.container').style.minHeight = layoutHei + "px";
-    
+        document.querySelector(".container").style.minHeight = layoutHei + "px";
+
         // var container = document.querySelector(".container").offsetHeight;
         // document.querySelector(".container").css({"height" : container});
         // $(".content").css({"height" : container});

@@ -45,7 +45,7 @@
                             <span>기부 기록</span>
                             <button class="btn-next"></button>
                         </li>
-                        <li class="none" @click="moveNextPage('bookmarks')">
+                        <li id="liNotice" class="none" @click="moveNextPage('notice')">
                             <span>공지사항 등록</span>
                             <button class="btn-next"></button>
                         </li>
@@ -61,9 +61,12 @@
 export default {
   mounted() {
     const userInfo = this.getGlobal('USER_INFO');
-    console.log('userInfo    ', userInfo);
     document.getElementById('pUserNm').innerHTML = userInfo.name;
     document.getElementById('pUserId').innerHTML = userInfo.id;
+
+    if(userInfo.id == 'master'){
+        document.getElementById('liNotice').classList.remove('none');
+    }
   },
   methods: {
     moveNextPage(pageNm) {
@@ -75,7 +78,7 @@ export default {
         text: '로그아웃 하시겠습니까?',
       }).then((flag) => {
         if (flag === true) { // 확인
-          this.setGlobal('USER_INFO', {});
+          sessionStorage.clear();
           this.$router.replace({ path: '/login' });
         }
       });

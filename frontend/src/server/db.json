@@ -52,17 +52,20 @@
       "endDt": 20211030,
       "item_id": 301,
       "id": 3
+    },
+    {
+      "user_id": "user1",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "'튀르키예,시리아 지진피해' 긴급구호지원",
+      "groupNm": "사회복지법인 광명시사회복지협의회",
+      "startDt": 20230215,
+      "endDt": 20230331,
+      "item_id": 278,
+      "id": 4
     }
   ],
   "donationHist": [
-    {
-      "user_id": "user1",
-      "title": "동물복지 향상을 위한 모집",
-      "groupNm": "캣치독팀",
-      "item_id": 301,
-      "amount": 5000,
-      "id": 3
-    },
     {
       "user_id": "jas1226",
       "title": "시리아-튀르키예 대지진 특별모금",
@@ -70,6 +73,62 @@
       "item_id": 780,
       "amount": 5000,
       "id": 4
+    },
+    {
+      "user_id": "user1",
+      "title": "'튀르키예,시리아 지진피해' 긴급구호지원",
+      "groupNm": "사회복지법인 광명시사회복지협의회",
+      "item_id": 278,
+      "amount": 15000,
+      "id": 5
+    },
+    {
+      "user_id": "user1",
+      "title": "북한 및 국내외 인도적 지원과 개발협력 기금마련",
+      "groupNm": "사단법인 한국제이티에스",
+      "item_id": 104,
+      "amount": 5000,
+      "id": 6
+    },
+    {
+      "user_id": "user1",
+      "title": "자연재해 등으로 위기상황에 처한 국내 및 해외 주민 의료지원",
+      "groupNm": "사단법인 글로벌케어",
+      "item_id": 117,
+      "amount": 5000,
+      "id": 7
+    },
+    {
+      "user_id": "user1",
+      "title": "시리아-튀르키예 대지진 특별모금",
+      "groupNm": "(사)광주국제교류센터",
+      "item_id": 780,
+      "amount": 5000,
+      "id": 8
+    },
+    {
+      "user_id": "user1",
+      "title": "국내외 취약계층에게 물질적, 정서적 지원",
+      "groupNm": "월드휴먼브리지",
+      "item_id": 282,
+      "amount": 10000,
+      "id": 9
+    },
+    {
+      "user_id": "user1",
+      "title": "해외 및 국내 빈곤 가정 식량지원, 해외 및 국내 빈곤 가정 청소년 교육 지원, 해외 및 국내 빈곤 가정 긴급 사례지원",
+      "groupNm": "사단법인 글로벌비전",
+      "item_id": 99,
+      "amount": 5000,
+      "id": 10
+    },
+    {
+      "user_id": "master",
+      "title": "인천 지역 코로나19 위기 극복을 위한 긴급 지원",
+      "groupNm": "사단법인 인천시민재단",
+      "item_id": 317,
+      "amount": 20000,
+      "id": 11
     }
   ],
   "volunteerHist": []

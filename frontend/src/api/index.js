@@ -113,8 +113,8 @@ function getDonatinonHistory() {
 }
 
 // 기부목록 업데이트
-function updateDonationHistory(sendObj) {
-  return axios.put(`${config.fakeServer}/donationHist`, sendObj);
+function putDonationHistory(sendObj) {
+  return axios.put(`${config.fakeServer}/donationHist/${sendObj.id}`, sendObj);
 }
 
 // 기부목록 추가하기
@@ -136,6 +136,6 @@ export {
   postBookmarks,
   deleteBookmarks,
   getDonatinonHistory,
-  updateDonationHistory,
+  putDonationHistory,
   postDonationHistory,
 };

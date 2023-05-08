@@ -1,5 +1,6 @@
 <template>
     <div>
+      <div class="content">
         <div class="scroll-wrap">
             <div class="list-cont">
                 <div class="list-wrap">
@@ -14,11 +15,12 @@
                     </ul>
                 </div>
             </div>
-            <div class="nodata-wrap">
+            <div class="nodata-wrap none">
                 <div class="no-data-img"></div>
                 <p>기부 내역이 없습니다.</p>
             </div>
         </div>
+      </div>
     </div>
 </template>
 
@@ -45,8 +47,10 @@ export default {
           _this.histList = rd.data.histories;
 
           if (_this.histList.length > 0) {
+            document.querySelector('.scroll-wrap').classList.remove('flex');
             document.querySelector('.nodata-wrap').classList.add('none');
           } else {
+            document.querySelector('.scroll-wrap').classList.add('flex');
             document.querySelector('.nodata-wrap').classList.remove('none');
           }
         }

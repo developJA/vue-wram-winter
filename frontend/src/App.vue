@@ -20,7 +20,10 @@ export default {
     CommonPopup,
     IndicatorLayout,
   },
-  mounted() {
+  mountd() {
+    this.Common.resizeContents();
+  },
+  updated() {
     this.Common.resizeContents();
   },
 };
