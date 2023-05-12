@@ -3,7 +3,7 @@
     {
       "id": "master",
       "pw": "987654321",
-      "name": "마스터",
+      "name": "관리자",
       "email": "devt3211@gmail.com"
     },
     {
@@ -43,17 +43,6 @@
       "id": 2
     },
     {
-      "user_id": "jas1226",
-      "type": "donation",
-      "typeNm": "기부",
-      "title": "동물복지 향상을 위한 모집 ",
-      "groupNm": "캣치독팀",
-      "startDt": 20201031,
-      "endDt": 20211030,
-      "item_id": 301,
-      "id": 3
-    },
-    {
       "user_id": "user1",
       "type": "donation",
       "typeNm": "기부",
@@ -63,6 +52,17 @@
       "endDt": 20230331,
       "item_id": 278,
       "id": 4
+    },
+    {
+      "user_id": "master",
+      "type": "donation",
+      "typeNm": "기부",
+      "title": "산불 피해 이재민을 살리는 캠페인 \"사랑으로함께\"",
+      "groupNm": "재단법인온누리선교재단",
+      "startDt": 20220327,
+      "endDt": 20220420,
+      "item_id": 458,
+      "id": 5
     }
   ],
   "donationHist": [
@@ -127,9 +127,47 @@
       "title": "인천 지역 코로나19 위기 극복을 위한 긴급 지원",
       "groupNm": "사단법인 인천시민재단",
       "item_id": 317,
-      "amount": 20000,
+      "amount": 25000,
       "id": 11
+    },
+    {
+      "user_id": "master",
+      "title": "국내 취약계층 지원사업 및 저개발국가 국제개발협력 사업",
+      "groupNm": "사회적협동조합 지파운데이션 ",
+      "item_id": 62,
+      "amount": 10000,
+      "id": 13
+    },
+    {
+      "user_id": "master",
+      "title": "자연재해 등으로 위기상황에 처한 국내 및 해외 주민 의료지원",
+      "groupNm": "사단법인 글로벌케어",
+      "item_id": 117,
+      "amount": 15000,
+      "id": 14
     }
   ],
-  "volunteerHist": []
+  "volunteerHist": [],
+  "notices": [
+    {
+      "writer_id": "master",
+      "writer_name": "관리자",
+      "title": "ㅎㅎ",
+      "type_code": "alarm",
+      "type_name": "알림",
+      "content": "ㅎㅎㅎ허ㅓㅓㅓㅓ",
+      "reg_date": "20230509",
+      "id": 1
+    },
+    {
+      "writer_id": "master",
+      "writer_name": "관리자",
+      "title": "작은돈부터 기부 시작",
+      "type_code": "event",
+      "type_name": "이벤트",
+      "content": "소액의 금액부터 기부를 시작해 보세요.\n추첨을 통해 소정의 상품을 드려요~!\n1등 : 노트북\n2등 : 목걸이\n3등 : 아메리카노 기프티콘\n\n많은 참여 부탁드립니다.\n",
+      "reg_date": "20230511",
+      "id": 2
+    }
+  ]
 }

@@ -43,7 +43,8 @@ export default {
         { lb: '내위치', value: 'map' },
         { lb: '지역', value: 'region' },
       ];
-      _this.$popList(param, function (rs) {
+      _this.$popList(param)
+      .then((rs) => {
         console.log('list popup callback', rs);
         document.getElementById('inpSelBox').value = rs.lb;
         document.getElementById('inpSelBox').setAttribute('data-value', rs.value);

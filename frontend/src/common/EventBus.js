@@ -5,10 +5,10 @@ const EventBus = new Vue();
 
 export default EventBus;
 
-export function $popAlert(param, callback) {
+export function $popAlert(param) {
   console.log('alert eventBus');
   if (_.isString(param)) param = { text: param };
-  EventBus.$emit('showAlert', param, callback);
+  EventBus.$emit('showAlert', param);
   EventBus.$off('CBAlert');
   return new Promise((resolve) => {
     EventBus.$on('CBAlert', () => {
@@ -33,10 +33,10 @@ export function $popConfirm(param) {
   });
 }
 
-export function $popList(param, callback) {
+export function $popList(param) {
   if (_.isString(param)) param = { text: param };
 
-  EventBus.$emit('showList', param, callback);
+  EventBus.$emit('showList', param);
 
   EventBus.$off('CBList');// 기 존재되는 이벤트 초기화
 

@@ -227,3 +227,8 @@ p {
 	background-size: auto 3.5rem;
 	image-rendering: -webkit-optimize-contrast;
 }
+
+/* 정렬 */
+.txt-rgt{
+    text-align: right;
+}

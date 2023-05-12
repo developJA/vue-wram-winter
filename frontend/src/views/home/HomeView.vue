@@ -45,17 +45,13 @@
                 <div class="notice-wrap">
                     <div class="cont-ttl">
                         <h3>공지사항</h3>
-                        <button>더보기</button>
+                        <button @click="$router.push(`home/notice`);">더보기</button>
                     </div>
                     
                     <ul>
-                        <li>
-                            <p class="title">[알림]작은돈부터 기부 시작!</p>
-                            <p class="date">2023-02-01</p>
-                        </li>
-                        <li>
-                            <p class="title">[알림]작은돈부터 기부 시작!</p>
-                            <p class="date">2023-02-01</p>
+                        <li v-for="listItem in notices" v-bind:key="listItem.item" @click="moveNotiDetail(listItem)">
+                            <p class="title">[{{ listItem.type_name }}] {{ listItem.title }}</p>
+                            <p class="date">{{ CommonUtil.getYMD(listItem.reg_date) }}</p>
                         </li>
                     </ul>
                 </div>
@@ -66,19 +62,30 @@
 </template>
 
 <script>
-
+import { getMainApi } from '../../server/api.js';
 export default {
+    data(){
+        return {
+            news : [],
+            notices : [],
+        }
+    },
     created() {
-        
+        const _this = this;
+        getMainApi({}, function(rd){
+            if(rd.status === 'SUCCESS'){
+                _this.notices = rd.data.noticeList;
+            }
+        })
     },
     methods : {
-        async getSeaWeatherData(){
-        let rst = await this.$MNetSend({
-            url: '',
-        });
-
-        console.log(rst);
-
+        moveNotiDetail(obj){
+            this.$router.push({
+                name: 'noticeDetail',
+                params: {
+                    noticeInfo: obj,
+                },
+            });
         }
     }
 }

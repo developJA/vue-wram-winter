@@ -66,10 +66,7 @@ export default {
   },
   methods : {
     selectItem(item){
-      this.callback(item);
-      setTimeout(function(){
-        EventBus.$emit("closePop");
-      },200);
+      this.$emit("click", item) ;
     },
     closePoup(){
       EventBus.$emit("closePop");

@@ -122,6 +122,16 @@ function postDonationHistory(sendObj) {
   return axios.post(`${config.fakeServer}/donationHist`, sendObj);
 }
 
+// 공지사항 가져오기
+function getNotices(){
+  return axios.get(`${config.fakeServer}/notices`);
+}
+
+// 기부목록 추가하기
+function postNotices(sendObj) {
+  return axios.post(`${config.fakeServer}/notices`, sendObj);
+}
+
 export {
   getAreaCodeInquiryList,
   getCntrCategoryGrpList,
@@ -138,4 +148,6 @@ export {
   getDonatinonHistory,
   putDonationHistory,
   postDonationHistory,
+  getNotices,
+  postNotices,
 };

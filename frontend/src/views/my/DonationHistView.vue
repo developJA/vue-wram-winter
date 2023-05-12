@@ -58,6 +58,13 @@ export default {
     },
     moveDetail(obj) {
       console.log(obj);
+      this.$router.push({
+        name: 'donationDetail',
+        params: {
+          groupName : obj.groupNm,
+          itemId : obj.item_id,
+        }
+      });
     },
   },
 };

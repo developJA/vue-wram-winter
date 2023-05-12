@@ -45,7 +45,7 @@
                             <span>기부 기록</span>
                             <button class="btn-next"></button>
                         </li>
-                        <li id="liNotice" class="none" @click="moveNextPage('notice')">
+                        <li @click="moveNextPage('noticeWrite')" id="liNotice" class="none" >
                             <span>공지사항 등록</span>
                             <button class="btn-next"></button>
                         </li>

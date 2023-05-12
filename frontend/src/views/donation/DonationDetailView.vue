@@ -7,9 +7,9 @@
                     <i class="ico-fav"></i>
                     <span class="a11y-blind">즐겨찾기</span>
                 </div>
-                <img :src="drawImage(donationInfo.rcritrNm)">
+                <img :src="drawImage(groupName)">
             </div>
-            <div class="cont-wrap">
+            <div class="cont-wrap" v-if="donationInfo">
                 <div class="top-box">
                     <span class="tag">#{{ donationInfo.reprsntSj }}</span>
                     <p class="num">{{ CommonUtil.addComma(String(donationInfo.rcritGoalAm)) }}원</p>
@@ -92,35 +92,27 @@ export default {
   data() {
     return {
       donationInfo: {},
+      groupName : "",
+      itemId : "",
       client: null,
       centerDntnList: [], // 단체별 기부목록
       bookmarkId: '', // 즐겨찾기 id
     };
   },
   created() {
-    // query로 넘겨받은 donation정보
-    const { query } = this.$router.currentRoute;
-    this.donationInfo = query.donationInfo;
+    // params 넘겨받은 donation정보
+    const { params } = this.$router.currentRoute;
+    this.donationInfo = params.donationInfo;
+    this.groupName = params.groupName;
+    this.itemId = params.itemId,
     console.log('donationInfo  >>> ', this.donationInfo);
 
-    this.searchGoogleImage();
-  },
-  mounted() {
-    const _this = this;
-
-    // 즐겨찾기 저장여부 확인
-    const param = {
-      user_id: _this.getGlobal('USER_INFO').id,
-      type: 'donation',
-      item_id: _this.donationInfo.rcritrId,
-    };
-    checkMyBookmarkApi(param, function (rd) {
-      console.log(rd);
-      if (rd.data.bookmarks !== undefined) { // 즐겨찾기 추가된 항목인 경우
-        _this.bookmarkId = rd.data.bookmarks.id;
-        document.getElementsByClassName('bookmark')[0].classList.add('on');
-      }
-    });
+    if(this.donationInfo !== undefined){
+      this.searchGoogleImage();
+    }else{
+      this.getCenterDonationList();
+    }
+    
   },
   methods: {
     // 기부단체 이미지
@@ -178,14 +170,46 @@ export default {
     },
     // 기부단체별 목록 조회
     getCenterDonationList() {
+      const _this = this;
       const param = {
-        schCntrProgrmRegistNo: this.donationInfo.cntrProgrmRegistNo,
+        keyword: this.groupName,
       };
       getCntrGrpProgramList(param)
         .then((res) => {
           console.log(res);
-          this.centerDntnList = res.data.response.body.items.item; // 전체 조회
+          const item = res.data.response.body.items.item;
+          if(Array.isArray(item)){
+            _this.centerDntnList = item;
+          }else{
+            _this.centerDntnList = [item];
+          }
+          // console.log("this.centerDntnList   >> ",_this.centerDntnList);
+
+          // donation info 업데이트
+          const dntnObj = _this.centerDntnList.find(x => x.rcritrId == _this.itemId);
+          console.log("dntnObj   >> ", dntnObj);
+          _this.donationInfo = dntnObj;
+
+          this.checkBookmarks();
         });
+    },
+    // 즐겨찾기 여부 확인
+    checkBookmarks() {
+      const _this = this;
+
+      // 즐겨찾기 저장여부 확인
+      const param = {
+        user_id: _this.getGlobal('USER_INFO').id,
+        type: 'donation',
+        item_id: _this.itemId,
+      };
+      checkMyBookmarkApi(param, function (rd) {
+        console.log(rd);
+        if (rd.data.bookmarks !== undefined) { // 즐겨찾기 추가된 항목인 경우
+          _this.bookmarkId = rd.data.bookmarks.id;
+          document.getElementsByClassName('bookmark')[0].classList.add('on');
+        }
+      });
     },
     // 즐겨찾기 저장
     saveBookmarks() {

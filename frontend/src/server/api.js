@@ -214,6 +214,78 @@ function donateApi(sendData, _callback) {
     });
 }
 
+function getNoticeListApi(sendData, _callback) {
+  let result = {};
+
+  api.getNotices()
+    .then((res) => {
+      result = {
+        status: 'SUCCESS',
+        data: {
+          noticeList: res.data,
+        },
+      };
+
+      _callback(result);
+    })
+    .catch((err) => {
+      console.log('err   >>> ', err);
+    });
+}
+
+function regNoticeListApi(sendData, _callback) {
+  let result = {};
+
+  // 로그인 여부 체크
+  if (sendData.writer_id === undefined) {
+    EventBus.$popAlert('다시 로그인 해주세요.');
+    return false;
+  }
+
+  api.postNotices(sendData)
+    .then((res) => {
+      console.log('postNotices res >>>>> ', res);
+      result = {
+        status: 'SUCCESS',
+        data: {
+          noticeList: res.data,
+        },
+      };
+
+      _callback(result);
+    })
+    .catch((err) => {
+      console.log('errr   >>> ', err);
+    });
+}
+
+function getMainApi(sendData, _callback) {
+  let result = {};
+  let noticeList = [];
+
+  // 공지사항 조회
+  api.getNotices()
+    .then((res) => {
+      if(res.data.length > 0){
+        noticeList = res.data.slice(0,2);
+      }
+
+      // 따뜻한 소식 조회
+      result = {
+        status: 'SUCCESS',
+        data: {
+          noticeList,
+        },
+      };
+
+      _callback(result);
+    })
+    .catch((err) => {
+      console.log('getNotices    err   >>> ', err);
+    });
+}
+
+
 export {
   loginApi,
   signUpApi,
@@ -223,4 +295,7 @@ export {
   checkMyBookmarkApi,
   getDonateHistApi,
   donateApi,
+  getNoticeListApi,
+  regNoticeListApi,
+  getMainApi,
 };

@@ -13,7 +13,7 @@
                             <th class="bold">분류</th>
                             <td class="left">
                                 <div class="inp-text select" @click="showSelectPopup">
-                                    <button type="button" class="btn-select">선택</button>
+                                    <button id="btnSelBox" type="button" class="btn-select">선택</button>
                                 </div>
                             </td>
                         </tr>
@@ -26,7 +26,7 @@
                         <tr>
                             <th class="bold">내용</th>
                             <td class="left">
-                                <textarea placeholder="등록할 내용을 입력하세요."></textarea>
+                                <textarea id="txtContent" placeholder="등록할 내용을 입력하세요."></textarea>
                             </td>
                         </tr>
                     </tbody>
@@ -35,13 +35,14 @@
             
         </div>
         <div class="bottom-box pdtb15 no-flex">
-            <button id="btnRegist" class="btn-txt" @click="">등록하기</button>
+            <button id="btnRegist" class="btn-txt" @click="registNotice">등록하기</button>
         </div>
       </div>
     </div>
 </template>
 
 <script>
+import { regNoticeListApi } from '../../server/api.js';
 
 export default {
     methods : {
@@ -50,13 +51,36 @@ export default {
             const _this = this;
             param.list = [
                 { lb: '알림', value: 'alarm' },
+                { lb: '이벤트', value: 'event' }
             ];
-            _this.$popList(param, function (rs) {
+            _this.$popList(param)
+            .then((rs) => {
                 console.log('list popup callback', rs);
-                document.getElementById('inpSelBox').value = rs.lb;
-                document.getElementById('inpSelBox').setAttribute('data-value', rs.value);
+                document.getElementById('btnSelBox').innerText = rs.lb;
+                document.getElementById('btnSelBox').setAttribute('data-value', rs.value);
             });
         },
+        registNotice() {
+            const _this = this;
+            const yyyymmdd = new Date().toISOString().substring(0,10).replace(/-/g,'');
+            var param = {
+                writer_id : _this.getGlobal('USER_INFO').id,
+                writer_name : _this.getGlobal('USER_INFO').name,
+                title : document.getElementById('inpTitle').value,
+                type_code : document.getElementById('btnSelBox').getAttribute('data-value'),
+                type_name : document.getElementById('btnSelBox').innerText,
+                content : document.getElementById('txtContent').value,
+                reg_date : yyyymmdd
+            }
+            regNoticeListApi(param, function(rd){
+                if(rd.status === 'SUCCESS'){
+                    _this.$popAlert("정상적으로 저장되었습니다.")
+                    .then(() => {
+                        $router.go(-1); // 뒤로
+                    });
+                }
+            })
+        }
     }
 }
 </script>

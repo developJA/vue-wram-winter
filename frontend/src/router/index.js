@@ -6,14 +6,16 @@ import IntroView from '../views/common/IntroView.vue';
 import LoginView from '../views/common/LoginView.vue';
 import SignupView from '../views/common/SignupView.vue';
 import HomeView from '../views/home/HomeView.vue';
+import NoticeView from '../views/home/NoticeView.vue';
+import NoticeDetailView from '../views/home/NoticeDetailView.vue';
 import VolunteerView from '../views/volunteer/VolunteerView.vue';
 import DonationView from '../views/donation/DonationView.vue';
 import MyView from '../views/my/MyView.vue';
 import DonationDetailView from '../views/donation/DonationDetailView.vue';
 import VolunteerDetailView from '../views/volunteer/VolunteerDetailView.vue';
 import BookmarksView from '../views/my/BookmarksView.vue';
-import DonationHist from '../views/my/DonationHistView.vue';
-import Notice from '../views/my/NoticeView.vue';
+import DonationHistView from '../views/my/DonationHistView.vue';
+import NoticeWriteView from '../views/my/NoticeWriteView.vue';
 
 // lazyload 적용
 // () => import(/* webpackChunkName: "intro" */'views/intro');
@@ -59,6 +61,24 @@ const router = new Router({
       path: '/home',
       name: 'home',
       component: HomeView,
+      meta: {
+        layout: Define.LAYOUT_TYPE.DEFAULT,
+        className: 'dashboard',
+      },
+    },
+    {
+      path: '/home/notice',
+      name: 'notice',
+      component: NoticeView,
+      meta: {
+        layout: Define.LAYOUT_TYPE.DEFAULT,
+        className: 'dashboard',
+      },
+    },
+    {
+      path: '/home/noticeDetail',
+      name: 'noticeDetail',
+      component: NoticeDetailView,
       meta: {
         layout: Define.LAYOUT_TYPE.DEFAULT,
         className: 'dashboard',
@@ -121,16 +141,16 @@ const router = new Router({
     {
       path: '/my/donationHist',
       name: 'donationHist',
-      component: DonationHist,
+      component: DonationHistView,
       meta: {
         layout: Define.LAYOUT_TYPE.FRAME,
         className: 'dashboard',
       },
     },
     {
-      path: '/my/notice',
-      name: 'notice',
-      component: Notice,
+      path: '/my/noticeWrite',
+      name: 'noticeWrite',
+      component: NoticeWriteView,
       meta: {
         layout: Define.LAYOUT_TYPE.FRAME,
         className: 'dashboard',

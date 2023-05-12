@@ -21,7 +21,7 @@
                     <p class="right-quote">"</p>
                 </div>
                 <div class="bottom-box pdtb15">
-                  <button id="btnDonate" class="btn-txt">5,000원 기부하기</button>
+                  <button id="btnDonate" class="btn-txt">봉사 참여하기</button>
                 </div>
             </div>
         </div>

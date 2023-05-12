@@ -145,9 +145,11 @@ export default {
     selectItem(obj) {
       console.log('sel obj   : ', obj);
       this.$router.push({
-        path: 'donation/donationDetail',
-        query: {
+        name: 'donationDetail',
+        params: {
           donationInfo: obj,
+          groupName : obj.rcritrNm,
+          itemId : obj.rcritrId,
         },
       });
     },
