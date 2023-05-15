@@ -6,7 +6,7 @@ const config = {
   baseUrl: '/openapi/service/rest',
   key: 'czDub2E2d3LEXxD6Oc%2FG9Pzpc1IF9B7WiEUeghL9oSO0V7bFP8PRYBODUdoVNG2knFQcdXqJpG8HwPXi%2BuCxSw%3D%3D',
   lang: 'ko-KR',
-  fakeServer: 'http://localhost:3000',
+  fakeServer: process.env.VUE_APP_SERVER,
 };
 
 axios.interceptors.request.use(

@@ -21,6 +21,9 @@ p {
     display: flex;
     flex-direction: column;
 }
+a{
+	-webkit-tap-highlight-color: transparent;
+}
 .frame .container,
 .default .container
 {
