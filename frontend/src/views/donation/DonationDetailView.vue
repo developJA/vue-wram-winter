@@ -92,8 +92,8 @@ export default {
   data() {
     return {
       donationInfo: {},
-      groupName : "",
-      itemId : "",
+      groupName: '',
+      itemId: '',
       client: null,
       centerDntnList: [], // 단체별 기부목록
       bookmarkId: '', // 즐겨찾기 id
@@ -107,12 +107,11 @@ export default {
     this.itemId = params.itemId,
     console.log('donationInfo  >>> ', this.donationInfo);
 
-    if(this.donationInfo !== undefined){
+    if (this.donationInfo !== undefined) {
       this.searchGoogleImage();
-    }else{
+    } else {
       this.getCenterDonationList();
     }
-    
   },
   methods: {
     // 기부단체 이미지
@@ -177,17 +176,17 @@ export default {
       getCntrGrpProgramList(param)
         .then((res) => {
           console.log(res);
-          const item = res.data.response.body.items.item;
-          if(Array.isArray(item)){
+          const { item } = res.data.response.body.items;
+          if (Array.isArray(item)) {
             _this.centerDntnList = item;
-          }else{
+          } else {
             _this.centerDntnList = [item];
           }
           // console.log("this.centerDntnList   >> ",_this.centerDntnList);
 
           // donation info 업데이트
-          const dntnObj = _this.centerDntnList.find(x => x.rcritrId == _this.itemId);
-          console.log("dntnObj   >> ", dntnObj);
+          const dntnObj = _this.centerDntnList.find((x) => x.rcritrId == _this.itemId);
+          console.log('dntnObj   >> ', dntnObj);
           _this.donationInfo = dntnObj;
 
           this.checkBookmarks();

@@ -266,8 +266,8 @@ function getMainApi(sendData, _callback) {
   // 공지사항 조회
   api.getNotices()
     .then((res) => {
-      if(res.data.length > 0){
-        noticeList = res.data.slice(0,2);
+      if (res.data.length > 0) {
+        noticeList = res.data.slice(0, 2);
       }
 
       // 따뜻한 소식 조회
@@ -284,7 +284,6 @@ function getMainApi(sendData, _callback) {
       console.log('getNotices    err   >>> ', err);
     });
 }
-
 
 export {
   loginApi,

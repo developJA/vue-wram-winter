@@ -123,7 +123,7 @@ function postDonationHistory(sendObj) {
 }
 
 // 공지사항 가져오기
-function getNotices(){
+function getNotices() {
   return axios.get(`${config.fakeServer}/notices`);
 }
 
