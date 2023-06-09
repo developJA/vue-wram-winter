@@ -52,9 +52,8 @@ export default {
 
       getAreaCodeInquiryList(param)
         .then((res) => {
-          console.log(res.data.response.body);
-          const { body } = res.data.response;
-          const items = body.items.item;
+          console.log(res);
+          const items = res.items.item;
 
           // console.log(items);
           const _sidoList = items.reduce(function (acc, curr) {
@@ -79,9 +78,7 @@ export default {
 
       getAreaCodeInquiryList(param)
         .then((res) => {
-          // console.log(res.data.response.body);
-          const { body } = res.data.response;
-          const items = body.items.item;
+          const items = res.items.item;
 
           console.log('getGugunList   >>>   ', items);
           if (Array.isArray(items)) {

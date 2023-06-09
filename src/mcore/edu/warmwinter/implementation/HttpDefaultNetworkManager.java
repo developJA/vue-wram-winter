@@ -450,9 +450,10 @@ public class HttpDefaultNetworkManager extends AsyncHttpNetwork {
 			
 			// 원격서버로부터 수신데이터를 JSON Object로 변환
 			recvDataJson = new JSONObject(rd);
-			
+			recvDataJson = (JSONObject)recvDataJson.get("response");
+
 			// 헤드(Head) 정보 추출
-			headDataJson = (JSONObject)recvDataJson.get("head");
+			headDataJson = (JSONObject)recvDataJson.get("header");
 			PLog.i(CLASS_TAG, "// Response Header[" + headDataJson.toString() + "]");
 			
 			
@@ -481,6 +482,8 @@ public class HttpDefaultNetworkManager extends AsyncHttpNetwork {
 			// 결과 코드 
 			if(headDataJson.isNull("result_code") == false)
 				strResultCode = headDataJson.getString("result_code");
+			if(headDataJson.isNull("resultCode") == false)
+				strResultCode = headDataJson.getString("resultCode");
 			
 			// 결과 메시지 
 			if(headDataJson.isNull("result_msg") == false)
@@ -523,7 +526,7 @@ public class HttpDefaultNetworkManager extends AsyncHttpNetwork {
 			HttpPacketManager.getInstance().removeProgressDialog(nRecvPacketId);
 			
 			// 요청에 대한 결과가 성공일 경우
-			if (strResultCode.compareTo("200") == 0) {
+			if (strResultCode.compareTo("200") == 0 || strResultCode.compareTo("00") == 0) {
 				// 요청한 화면으로 수신한 데이터를 리턴한다.
 				selectedActivity.responseData(IActivityNetworkable.RESPONSE_DATA_TYPE_HTTP, strTrCode, callBackFunc, bodyDataJson.toString(), networkOptions);
 			} else {

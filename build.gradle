@@ -31,7 +31,7 @@ if (project.rootProject.file('local.properties').exists()) {
 
 android {
 	compileSdkVersion 30
-	//buildToolsVersion "30.0.3"
+	//buildToolsVersion "32.0.0"
 	useLibrary 'org.apache.http.legacy'
 	sourceSets {
 		main {

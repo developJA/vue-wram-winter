@@ -25,8 +25,8 @@
                                 <img src="" alt="">
                             </div>
                             <div class="thumb-cont">
-                                <p class="title">용인시 동물보호협회</p>
-                                <p class="cont">돈이 많아서 기부 1억씩 하고싶다</p>
+                                <p class="title">기부소식</p>
+                                <p class="cont">유저1 님께서 "국내외 취약계층에게 물질적, 정서적 지원"에 150,000원을 기부했어요.</p>
                                 <p class="bottom">총 모금액 150,000원</p>
                             </div>
                         </li>

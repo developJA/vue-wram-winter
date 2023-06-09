@@ -1,5 +1,6 @@
 import axios from 'axios';
 import EventBus from '@/common/EventBus';
+import { MNetSend } from '@/common/service.api';
 
 // 1. HTTP Request & Response와 관련된 기본 설정
 const config = {
@@ -29,32 +30,46 @@ axios.interceptors.response.use(
 
 // 2. API 함수들을 정리
 // 지역코드조회
-function getAreaCodeInquiryList(sendObj) {
+async function getAreaCodeInquiryList(sendObj) {
   const queryStr = new URLSearchParams(sendObj).toString();
-  return axios.get(`${config.baseUrl}/CodeInquiryService/getAreaCodeInquiryList?serviceKey=${config.key}&${queryStr}&numOfRows=1000`);
+  return await MNetSend({
+    url: `${config.baseUrl}/CodeInquiryService/getAreaCodeInquiryList?serviceKey=${config.key}&${queryStr}&numOfRows=1000`,
+    method : 'GET'
+  });
+  // return axios.get(`${config.baseUrl}/CodeInquiryService/getAreaCodeInquiryList?serviceKey=${config.key}&${queryStr}&numOfRows=1000`);
 }
 // 기부코드조회
-function getCntrRealmCodeList() {
+async function getCntrRealmCodeList() {
   // &clsType=A&pageNo=1&numOfRows=11 -- 기타까지의 리스트길이 : 11
-  return axios.get(`${config.baseUrl}/CodeInquiryService/getCntrRealmCodeList`);
+  return await MNetSend({
+    url: `${config.baseUrl}/CodeInquiryService/getCntrRealmCodeList`,
+    method : 'GET'
+  });
 }
 // 기부관련단체분야별목록조회
-function getCntrCategoryGrpList(sendObj) {
+async function getCntrCategoryGrpList(sendObj) {
   const queryStr = new URLSearchParams(sendObj).toString();
   // url += '&' + encodeURIComponent('schCntrClCode') + '=' + encodeURIComponent('01'); /**/
-  return axios.get(`${config.baseUrl}/ContributionGroupService/getCntrCategoryGrpList?serviceKey=${config.key}&${queryStr}`);
+  return await MNetSend({
+    url: `${config.baseUrl}/ContributionGroupService/getCntrCategoryGrpList?serviceKey=${config.key}&${queryStr}`,
+    method : 'GET'
+  });
+  // return axios.get(`${config.baseUrl}/ContributionGroupService/getCntrCategoryGrpList?serviceKey=${config.key}&${queryStr}`);
 }
 // 기부목록 조회
-function getCntrGrpProgramList(sendObj) {
+async function getCntrGrpProgramList(sendObj) {
   const queryStr = new URLSearchParams(sendObj).toString();
-  // url += '&' + encodeURIComponent('schCntrProgrmRegistNo') + '=' + encodeURIComponent('01'); /**/
-  return axios.get(`${config.baseUrl}/ContributionGroupService/getCntrGrpProgramList?serviceKey=${config.key}&${queryStr}`);
+  return await MNetSend({
+    url: `${config.baseUrl}/ContributionGroupService/getCntrGrpProgramList?serviceKey=${config.key}&${queryStr}`,
+    method : 'GET'
+  });
+  // return axios.get(`${config.baseUrl}/ContributionGroupService/getCntrGrpProgramList?serviceKey=${config.key}&${queryStr}`);
 }
 // 기부목록 조회 2
 // https://www.nanumkorea.go.kr/ctgp/selectCntrGrp.do?cntrRalm=&grpNm=&grpRegistCode=&pageIndex=2
 
 // 봉사 활동처 조회
-function getVolunteerList() {
+async function getVolunteerList() {
   let url = 'http://apis.data.go.kr/B460014/vmsdataview/getVollcolectionList'; /* URL */
   url += `?${encodeURIComponent('serviceKey')}=${config.key}`; /* Service Key */
   url += `&${encodeURIComponent('numOfRows')}=${encodeURIComponent('10')}`; /**/
@@ -64,21 +79,33 @@ function getVolunteerList() {
   url += `&${encodeURIComponent('areaCode')}=${encodeURIComponent('0101')}`; /**/
   // url += '&' + encodeURIComponent('TermType') + '=' + encodeURIComponent('1'); /**/
   // url += '&' + encodeURIComponent('status') + '=' + encodeURIComponent('1'); /**/
-  return axios.get(url);
+  return await MNetSend({
+    url: url,
+    method : 'GET'
+  });
+  // return axios.get(url);
 }
 
 // 봉사 참여정보 지역별 목록조회
-function getVolunteerAreaList(sendObj) {
+async function getVolunteerAreaList(sendObj) {
   const queryStr = new URLSearchParams(sendObj).toString();
   // url += '&' + encodeURIComponent('schSido') + '=' + encodeURIComponent('6410000'); /**/
   // url += '&' + encodeURIComponent('schSign1') + '=' + encodeURIComponent('6410000'); /**/
-  return axios.get(`${config.baseUrl}/VolunteerPartcptnService/getVltrSearchWordList?serviceKey=${config.key}&${queryStr}`);
+  return await MNetSend({
+    url: `${config.baseUrl}/VolunteerPartcptnService/getVltrSearchWordList?serviceKey=${config.key}&${queryStr}`,
+    method : 'GET'
+  });
+  // return axios.get(`${config.baseUrl}/VolunteerPartcptnService/getVltrSearchWordList?serviceKey=${config.key}&${queryStr}`);
 }
 
 // 자원봉사참여 상세정보
-function getVolunteerDetail(sendObj) {
+async function getVolunteerDetail(sendObj) {
   const queryStr = new URLSearchParams(sendObj).toString();
-  return axios.get(`${config.baseUrl}/VolunteerPartcptnService/getVltrPartcptnItem?serviceKey=${config.key}&${queryStr}`);
+  return await MNetSend({
+    url: `${config.baseUrl}/VolunteerPartcptnService/getVltrPartcptnItem?serviceKey=${config.key}&${queryStr}`,
+    method : 'GET'
+  });
+  // return axios.get(`${config.baseUrl}/VolunteerPartcptnService/getVltrPartcptnItem?serviceKey=${config.key}&${queryStr}`);
 }
 
 // 구글 이미지 검색 API

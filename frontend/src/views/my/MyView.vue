@@ -49,6 +49,10 @@
                             <span>공지사항 등록</span>
                             <button class="btn-next"></button>
                         </li>
+                        <li @click="moveNextPage('news')" id="liNews" class="none" >
+                            <span>따뜻한소식 관리</span>
+                            <button class="btn-next"></button>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -66,6 +70,7 @@ export default {
 
     if(userInfo.id == 'master'){
         document.getElementById('liNotice').classList.remove('none');
+        document.getElementById('liNews').classList.remove('none');
     }
   },
   methods: {

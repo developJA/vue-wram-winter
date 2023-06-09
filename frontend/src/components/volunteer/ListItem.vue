@@ -80,10 +80,10 @@ export default {
       getVolunteerAreaList(param)
         .then((res) => {
           console.log('getVolunteerAreaList     : ', res);
-          this.volunList = res.data.response.body.items.item;
+          this.volunList = res.items.item;
 
           // 전체 건수
-          this.totalCount = res.data.response.body.totalCount;
+          this.totalCount = res.totalCount;
           document.getElementById('emTotCnt').innerHTML = this.totalCount;
         })
         .then((err) => {

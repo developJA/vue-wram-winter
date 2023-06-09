@@ -50,7 +50,7 @@ export default {
     };
     getVolunteerDetail(param)
       .then((res) => {
-        this.volunteerInfo = res.data.response.body.items.item;
+        this.volunteerInfo = res.items.item;
       })
       .then((err) => {
         console.log(err);

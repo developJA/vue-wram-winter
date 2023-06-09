@@ -3,7 +3,7 @@
         <div class="content">
 
             <div id="divCateWrap" class="category-wrap">
-                <swiper class="swiper mrg10" :options="swiperOption">
+                <swiper class="swiper mrtb10" :options="swiperOption">
                     <swiper-slide v-for="cateItem in categories" v-bind:key="cateItem.item" ref="VuePerson">
                         <button class="btn-cate bg-light-green" @click="selectCategory(cateItem, $event)">{{cateItem.codeNm}}</button>
                     </swiper-slide>
@@ -74,10 +74,17 @@ export default {
       getCntrRealmCodeList()
         .then((res) => {
           this.categories.push({ code: '', codeNm: '전체' });
-          this.categories = this.categories.concat(res.data.response.body.items.item);
+          this.categories = this.categories.concat(res.items.item);
 
           this.getDonationTotCount();
         });
+
+      // let rst = await this.$MNetSend({
+      //   url: '/openapi/service/rest/CodeInquiryService/getCntrRealmCodeList',
+      //   method : 'GET'
+      // });
+
+      // console.log(rst);
     },
     selectCategory(obj, event) {
       if (document.getElementById('divCateWrap').querySelector('.on') != null) { // 선택된 element가 있을 경우
@@ -98,7 +105,7 @@ export default {
       };
       getCntrGrpProgramList(param)
         .then((res) => {
-          this.totCnt = res.data.response.body.totalCount;
+          this.totCnt = res.totalCount;
 
           console.log('리스트  총건수 : ', this.totCnt);
           this.getDonationList();
@@ -111,7 +118,7 @@ export default {
       };
       getCntrGrpProgramList(param)
         .then((res) => {
-          this.donationAllList = res.data.response.body.items.item; // 전체 조회
+          this.donationAllList = res.items.item; // 전체 조회
           this.setDonationList('');
 
           document.getElementsByClassName('btn-cate')[0].classList.add('on'); // '전체'버튼 활성화

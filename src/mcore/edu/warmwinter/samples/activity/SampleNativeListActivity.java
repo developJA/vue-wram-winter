@@ -522,7 +522,7 @@ public class SampleNativeListActivity extends AbstractActivity {
 		 * @param dhSendData : 송신 데이터(DataHandle 타입)
 		 * @param netReqOptions : 전문 옵션
 		 */
-		netReqOptions.targetServerName = "HTTP_HH_MAIN";  // (중요 : 반드시 AppManifext.xml에서 정의한 타켓 서버 이름을 설정해야 한다.)
+		netReqOptions.targetServerName = "HTTP_DEV";  // (중요 : 반드시 AppManifext.xml에서 정의한 타켓 서버 이름을 설정해야 한다.)
 		netReqOptions.indicatorMsg = "데이터 요청중입니다..";
 		requestData("rsc.sample_list", "", new DataHandler(sendData), netReqOptions);
 		

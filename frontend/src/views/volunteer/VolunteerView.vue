@@ -4,7 +4,7 @@
       <div>
           <div class="srch-wrap">
               <div class="inp-text select" @click="showSelectPopup">
-                  <input id="inpSelBox" type="text" readonly value="내위치">
+                  <input id="inpSelBox" type="text" readonly value="지역">
                   <button type="button" class="btn-select"></button>
               </div>
           </div>
@@ -26,7 +26,7 @@ import KakaoMap from '../../components/volunteer/KakaoMap.vue';
 export default {
   data() {
     return {
-      currComponent: 'map',
+      currComponent: 'region',
       sltRegionInfo: {},
     };
   },

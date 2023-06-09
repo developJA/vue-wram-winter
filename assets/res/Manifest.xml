@@ -37,7 +37,15 @@
         <plugins/>
     </library>
     <network>
-        <http/>
+        <http>
+            <HTTP_DEV>
+                <path>mcore.edu.warmwinter.implementation.HttpDefaultNetworkManager</path>
+                <address>http://openapi.1365.go.kr/</address>
+                <timeout>10000</timeout>
+                <encoding>utf-8</encoding>
+                <type>rest</type>
+            </HTTP_DEV>
+        </http>
         <socket/>
     </network>
     <application>

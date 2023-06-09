@@ -176,7 +176,7 @@ export default {
       getCntrGrpProgramList(param)
         .then((res) => {
           console.log(res);
-          const { item } = res.data.response.body.items;
+          const { item } = res.items;
           if (Array.isArray(item)) {
             _this.centerDntnList = item;
           } else {

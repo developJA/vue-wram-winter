@@ -87,6 +87,7 @@ export const MNetSend = (options) => {
     headers: options.headers || {},
   };
 
+  console.log("MNetSend");
   console.log(_options);
 
   if (!isMorpheus()) {
@@ -98,7 +99,7 @@ export const MNetSend = (options) => {
       axios.get(_options.url)
         .then((result) => {
           if (result.status == 200) {
-            resolve(result.data);
+            resolve(result.data.response.body);
           }
         })
         .catch((error) => {
